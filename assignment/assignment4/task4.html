@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <center>
+        <fieldset>
+          <div>
+            <legend><b>Registration Form</b></legend>
+            <br />
+            <label for="fullName"> First Name* :</label>
+            <input
+              type="texts"
+              id="fullName"
+              name="fullName"
+              placeholder="Enter your FirstName"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="lastName"> Last Name*:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              placeholder="Enter your LastName"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="email"> Email* :</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your Email"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="Password">Password :</label>
+            <input
+              type="password"
+              id="Password"
+              name="Password"
+              placeholder="Enter your Password"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="Gender"> Gender :</label>
+
+            <input type="radio" id="male" name="Gender" value="Male" />
+            <label for="male"> Male</label>
+
+            <input type="radio" id="female" name="Gender" value="Female" />
+            <label for="female"> Female</label>
+
+            <input type="radio" id="other" name="Gender" value="Other" />
+            <label for="other"> Other</label>
+          </div>
+          <br />
+          <div>
+            <label for="Preference"> Preference :</label>
+
+            <input
+              type="checkbox"
+              id="Acrylic painting"
+              name="Preference"
+              value="Acrylic painting"
+            />
+            <label for="Acrylic painting"> Acrylic painting</label>
+
+            <input
+              type="checkbox"
+              id="Oil painting"
+              name="Preference"
+              value="Oil painting"
+            />
+            <label for="Oil painting"> Oil painting</label>
+
+            <input
+              type="checkbox"
+              id="water color Painting"
+              name="Preference"
+              value="water color Painting"
+            />
+            <label for="water color Painting"> Water color Painting</label>
+          </div>
+          <br />
+          <div>
+            <section>
+              <label for="select Occupation"> select Occupation:</label>
+              <select id="Occupation" name="Occupation">
+                <option value="Student">Student</option>
+                <option value="Engineer">Engineer</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Other">Other</option>
+              </select>
+            </section>
+          </div>
+          <br />
+          <div>
+            <label for="Date of Birth"> Date of Birth :</label>
+            <input
+              type="date"
+              id="Date of Birth"
+              name="Date of Birth"
+              placeholder="Enter your Date of Birth"
+            />
+          </div>
+          <br />
+          <div>
+            <textarea
+              name="name"
+              id="bio"
+              placeholder="Share few lines About Yourself"
+            ></textarea>
+            <label for="bio"> Bio :</label>
+          </div>
+          <br />
+          <div>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+          </div>
+        </fieldset>
+      </center>
+    </form>
+  </body>
+</html>
