@@ -7,7 +7,119 @@
 </head>
 <body>
     <form action="">
-        
+       <table border="1" cellspacing = "2">
+         <div>
+            <legend><b>Registration Form : Dance Club</b></legend>
+            <br />
+         </div>
+        <tr>
+            <th><label for="fullName">Name :</label></th>
+            <td ><input
+              type="texts"
+              id="fullName"
+              name="fullName"
+              placeholder="Enter your FirstName"
+            /></td>
+        </tr>
+        <tr>
+            <th><label for="IC"> IC no :</label></th>
+            <td><input
+              type="text"
+              id="IC"
+              name="IC"
+              placeholder="Enter your IC No"
+            /></td>
+        </tr>
+        <tr>
+            <th> <label for="Address"> address :</label> </th>
+            <td>
+            <textarea
+              name="name"
+              id="Address"
+              placeholder="Enter your address"
+            ></textarea>
+            </td>
+
+        </tr>
+         <tr>     
+         <th><label for="Gender"> Gender :</label></th>
+            <td>
+
+            <input type="radio" id="male" name="Gender" value="Male" />
+            <label for="male"> Male</label>
+
+            <input type="radio" id="female" name="Gender" value="Female" />
+            <label for="female"> Female</label>
+
+        </td>
+        </tr>
+        <tr>
+            <th><label for="Dance">Dance type :</label></th>
+            <td><input
+              type="checkbox"
+              id="Dance"
+              name="Dance"
+              value="Ballet"
+            />
+            <label for="Dance"> Ballet</label>
+            <input
+              type="checkbox"
+              id="Dance"
+              name="Dance"
+              value="Hip Hop"
+            />
+            <label for="Dance"> Hip Hop</label>
+            <input
+              type="checkbox"
+              id="Dance"
+              name="Dance"
+              value="Contemporary"
+            />
+            <label for="Dance"> Contemporary</label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="compition"> Competition :</label></th>
+            <td>
+                <select>
+                    id="compition" name="compition">
+                    <option value="compition">State Level</option>
+                    <option value="compition">National level</option>
+                    <option value="compition">StateInternational level</option>
+
+
+                </select>
+            </td>
+        </tr>
+         <tr>
+            <th><label for="Nationality"> Nationality :</label></th>
+            <td>
+                <select>
+                    id="Nationality" name="Nationality">
+                    <option value="hindustani">hindustani</option>
+                    <option value="Malaysian">Malaysian</option>
+                    <option value="Singaporean">Singaporean</option>
+                    <option value="Indonesian">Indonesian</option>
+                </select>
+            </td>
+        </tr>
+         <tr>
+ 
+            <th><label for="password">Password :</label></th>
+            <td><input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+            /></td>
+         </tr>          
+
+                
+           
+       </table> 
+       <button type="submit"><b>Register Me</b></button>
+       <button type="reset"><b></b>Cancel</b></button>
+
     </form>
 </body>
 </html>
