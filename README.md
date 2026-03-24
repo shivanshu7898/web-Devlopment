@@ -1,2 +1,2 @@
-today task .... create a table in HTML and complte some assingment 
+today task .... complete assignment3 and start new asssignmnt 
 
