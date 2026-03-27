@@ -1,2 +1,2 @@
-today task .... Start new assignment
+today task .... Start CSS
 
