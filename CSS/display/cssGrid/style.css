@@ -1,0 +1,27 @@
+.outerDiv {
+    margin: 0 auto;
+    border: 1px solid black;
+    background-color: red;
+    height: 600px;
+    width: 600px;
+    display: grid; /* this is the property that makes the div a grid container */
+    grid-template-columns: auto auto auto; /* this is the property that defines the number of columns and their width */
+    grid-template-rows: auto auto auto; /* this is the property that defines the number of rows and their height */
+    justify-items: center;/* this is the property that defines how the items are aligned horizontally within their grid area */
+    align-items: center; /* this is the property that defines how the items are aligned vertically within their grid area */
+   
+    
+    
+}
+
+.innerDiv {
+   
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    background: white;
+    display: flex; /* this is the property that makes the div a flex container */
+    justify-content: center; /* this is the property that defines how the items are aligned horizontally within the flex container */
+    align-items: center; /* this is the property that defines how the items are aligned vertically within the flex container */
+  
+}

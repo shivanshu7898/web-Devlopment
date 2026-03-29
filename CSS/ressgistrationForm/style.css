@@ -1,0 +1,67 @@
+.container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items: center;
+  padding-left: 15px;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  
+}
+.form-group input {
+ 
+width: 90%;
+display: flex;
+justify-content: center;
+align-items: center;
+  
+margin-bottom: 1px;
+border: none;
+border-bottom: 1px darkgray solid;
+
+  padding: 8px 8px 8px 8px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background-color:blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  
+  margin-top: 40px;
+}
+p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: small;
+}
+#term {
+  display: flex;
+  align-items: center;
+  font-size: small;
+}
+#registration {
+ 
+  
+  text-decoration: underline;
+  
+  text-decoration-color: blue;
+}
+h1 {
+   display: flex;
+  justify-content: top;
+  align-items:left ;
+  padding-bottom: 20px;
+}
+i
+{
+  position: absolute;
+  margin-left: -10px;
+  color: gray;
+}
