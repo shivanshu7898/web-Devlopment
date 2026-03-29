@@ -1,0 +1,37 @@
+header{
+    background-color: rgb(130, 161, 189);
+    border-radius: 10px;
+}
+
+#table1{
+
+    background-color: rgb(232, 238, 244);
+    border: 0cm;
+    
+
+
+}
+#table2
+{
+    background-color: rgb(218, 224, 230);
+    border: 10px;
+    
+
+    
+}
+footer
+{
+    background-color: rgb(210, 217, 223); 
+    border-radius: 10px;
+}
+#student
+{
+    font-family: cursive;
+    font-size: x-large;
+    font-weight: 900;
+    font-style: sans-serif;
+    font-variant: small-caps;
+    text-align: right;
+    text-shadow: 10px,10px,10px,10px,black;
+
+}

@@ -1,0 +1,32 @@
+/* *{
+    margin: 0;
+    padding: 0; for removing default margin and padding of all elements
+} 
+  */
+ 
+ #div1
+{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: red;
+    /* display: inline; 
+    always new line */
+    display: inline-block;
+}
+#span1
+{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: rgb(110, 89, 89);
+        display: inline-block;
+
+}
+#h1
+{
+   
+    border: 1px solid black;
+    background-color: red;
+    display: none;
+}

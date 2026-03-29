@@ -1,0 +1,22 @@
+#div1{
+    width: 600px;
+    height: 200px;
+    background-color: red;
+    border: 1px solid black;
+    display: flex;
+    /* justify-content: center; for horizontal alignment */
+    /* align-items: center; for vertical alignment */
+    /* gap: 100px; for gapping 2 elements */
+    /* justify-content: space-between; for horizontal spacing */
+    /* justify-content: space-evenly; for horizontal spacing */
+
+}
+.divInner
+{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    
+    border: 1px solid black;
+    margin: 47px;
+}
