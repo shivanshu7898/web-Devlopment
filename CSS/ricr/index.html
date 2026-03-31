@@ -4,21 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header></header>
+    <header>
+      <div class="header1">
+        <div id="logo">
+          <img src="./image.png" alt="logo" id="logo" />
+        </div>
+        <div class="navbuttons">
+          <button id="home">Home</button>
+          <button id="about">About us</button>
+          <button id="courses">Courses</button>
+          <button id="ide">IDE</button>
+          <button id="contact">contact us</button>
+        </div>
+        <div class="callbuttons">
+          <button id="login">+91 9998881736</button>
+          <button id="signup">Student Login</button>
+        </div>
+      </div>
+    </header>
     <main>
-      <div>
+      <div class="container">
         <form>
-          <div>
-            <div id="head">
-              <span id="h1"><b>Enquiry Form</b></span>
-              <p>
-                Have questions or need assistance? Fill out the form below to
-                connect with our team and explore your opportunities.
-              </p>
-            </div>
-            <div>
+          <div class="heading">
+            <h1 id="h1">Enquiry Form</h1>
+            <p id="p1">
+              Have questions or need assistance? Fill out the form below to
+              connect with our team and explore your opportunities.
+            </p>
+          </div>
+          <div class="row1">
+            <div id="col1">
               <label for="fullName"> Person name*:</label>
               <input
                 type="texts"
@@ -27,7 +45,7 @@
                 placeholder="person name"
               />
             </div>
-            <div>
+            <div id="col2">
               <label for="contact name"> contact name:</label>
               <input
                 type="tel"
@@ -37,8 +55,8 @@
               />
             </div>
           </div>
-          <div>
-            <div>
+          <div class="row2">
+            <div id="col3">
               <label for="Email*"> Email* :</label>
               <input
                 type="email"
@@ -47,7 +65,7 @@
                 placeholder="Email"
               />
             </div>
-            <div>
+            <div id="col4">
               <label for="Qualification"> Qualification* :</label>
               <input
                 type="text"
@@ -57,17 +75,17 @@
               />
             </div>
           </div>
-          <div>
+          <div class="row3">
             <label for="college">college/School name* :</label>
             <input
-              type="number"
-              id="Experience"
-              name="Experience"
-              placeholder="Enter your Experience in years"
+              type="text"
+              id="college"
+              name="college"
+              placeholder="college/school name"
             />
           </div>
-          <div>
-            <div>
+          <div class="row4">
+            <div id="col5">
               <label for="year">year*:</label>
               <select id="year" name="year">
                 <option value="">Year</option>
@@ -79,7 +97,7 @@
                 <option value="">other</option>
               </select>
             </div>
-            <div>
+            <div id="col6">
               <label for="Branch">Branch*:</label>
               <input
                 type="text"
@@ -88,126 +106,183 @@
                 placeholder="Branch"
               />
             </div>
-            <div>
+          </div>
+          <div class="row5">
+            <div id="col7">
+              <form action="">
+                <h3>Interested in Which Course*</h3>
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="course"
+                    value="Full Stack Web Development"
+                  />
+                  Full Stack Web Development - Placement Oriented </label
+                ><br />
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="course"
+                    value="Data Science with Python"
+                  />
+                  Data Science with Python - Placement Oriented </label
+                ><br />
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="course"
+                    value="Data Analytics with Python"
+                  />
+                  Data Analytics with Python - Placement Oriented </label
+                ><br />
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="course"
+                    value="Business Analyst"
+                  />
+                  Business Analyst </label
+                ><br />
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="course"
+                    value="Java Programming"
+                  />
+                  Java Programming </label
+                ><br />
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="course"
+                    value="Python Programming"
+                  />
+                  Python Programming </label
+                ><br />
+
+                <label>
+                  <input
+                    type="checkbox"
+                    name="course"
+                    value="C/C++ Programming"
+                  />
+                  C/C++ Programming </label
+                ><br />
+
+                <label>
+                  <input type="checkbox" name="course" value="Other" />
+                  Other
+                </label>
+              </form>
+            </div>
+            <div id="col8">
               <div>
                 <form action="">
-                  <h3>Interested in Which Course*</h3>
+                  <h3>Source of Information*</h3>
+                  <p>
+                    (Only choose 'Received call from institute' if you actually
+                    got a call from us)
+                  </p>
 
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="course"
-                      value="Full Stack Web Development"
-                    />
-                    Full Stack Web Development - Placement Oriented </label
-                  ><br />
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="course"
-                      value="Data Science with Python"
-                    />
-                    Data Science with Python - Placement Oriented </label
-                  ><br />
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="course"
-                      value="Data Analytics with Python"
-                    />
-                    Data Analytics with Python - Placement Oriented </label
-                  ><br />
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="course"
-                      value="Business Analyst"
-                    />
-                    Business Analyst </label
-                  ><br />
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="course"
-                      value="Java Programming"
-                    />
-                    Java Programming </label
-                  ><br />
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="course"
-                      value="Python Programming"
-                    />
-                    Python Programming </label
-                  ><br />
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="course"
-                      value="C/C++ Programming"
-                    />
-                    C/C++ Programming </label
-                  ><br />
-
-                  <label>
-                    <input type="checkbox" name="course" value="Other" />
-                    Other
-                  </label>
+                  <select name="source" required>
+                    <option value="">-- Select an option --</option>
+                    <option value="NewsPaper">NewsPaper/Print Media</option>
+                    <option value="Friends">Friends/Relatives</option>
+                    <option value="SocialMedia">Social Media</option>
+                    <option value="Workshop">Workshop/Seminar</option>
+                    <option value="ReceivedCall">
+                      Received call from Institute
+                    </option>
+                    <option value="Other">Other</option>
+                  </select>
                 </form>
               </div>
-              <div>
-                <div>
-                  <form action="">
-                    <h3>Source of Information*</h3>
-                    <p>
-                      (Only choose 'Received call from institute' if you
-                      actually got a call from us)
-                    </p>
-
-                    <select name="source" required>
-                      <option value="">-- Select an option --</option>
-                      <option value="NewsPaper">NewsPaper/Print Media</option>
-                      <option value="Friends">Friends/Relatives</option>
-                      <option value="SocialMedia">Social Media</option>
-                      <option value="Workshop">Workshop/Seminar</option>
-                      <option value="ReceivedCall">
-                        Received call from Institute
-                      </option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </form>
-                </div>
-                <div>
-                  <form>
-                    <h3>Name of Executive*</h3>
-                    <select name="executive" required>
-                      <option value="">-- Select Executive --</option>
-                      <option value="Kasim Khan">Kasim Khan</option>
-                      <option value="Anushree Choubey">Anushree Choubey</option>
-                      <option value="Sheshram Ahirwar">Sheshram Ahirwar</option>
-                      <option value="Shani Mishra">Shani Mishra</option>
-                      <option value="Sankalp Shukla">Sankalp Shukla</option>
-                      <option value="Deepali Tated">Deepali Tated</option>
-                      <option value="Anchal Sejwar">Anchal Sejwar</option>
-                    </select>
-                  </form>
-                </div>
+              <div id="col9">
+                <form>
+                  <h3>Name of Executive*</h3>
+                  <select name="executive" required>
+                    <option value="">-- Select Executive --</option>
+                    <option value="Kasim Khan">Kasim Khan</option>
+                    <option value="Anushree Choubey">Anushree Choubey</option>
+                    <option value="Sheshram Ahirwar">Sheshram Ahirwar</option>
+                    <option value="Shani Mishra">Shani Mishra</option>
+                    <option value="Sankalp Shukla">Sankalp Shukla</option>
+                    <option value="Deepali Tated">Deepali Tated</option>
+                    <option value="Anchal Sejwar">Anchal Sejwar</option>
+                  </select>
+                </form>
               </div>
             </div>
           </div>
           <div>
-            <button type="submit">Submit</button>
+            <button class="button" type="submit">Submit</button>
           </div>
         </form>
       </div>
     </main>
-    <footer></footer>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <img id="logo" src="../display/image.png" alt="" />
+          <p>
+            RICR is a subsidiary of Raj Digital Private Limited. It is a premier
+            coding and robotics institute, empowering students with cutting-edge
+            education and real-world skills for a tech-driven future.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Host a Workshop</a></li>
+            <li><a href="#">Community Ambassador</a></li>
+            <li><a href="#">Work With Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Other Links</h3>
+          <ul>
+            <li><a href="#">Edunest Facility</a></li>
+          </ul>
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Information</h3>
+          <p>
+            Minal Mall, 4th Floor, Minal Residency, JK Road, Bhopal (462023)
+          </p>
+          <p>contact@ricr.in</p>
+          <p>+91 8889991736</p>
+          <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div id="raj ">
+          <p>© 2024 - Raj Digital Private Limited | All Rights Reserved</p>
+        </div>
+        <div id="site"><p>Sitemap</p></div>
+      </div>
+    </footer>
   </body>
 </html>
