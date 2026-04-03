@@ -1,2 +1,33 @@
 
+:root{
 
+    --mainColor: blue;
+    --subColor : rgb(194, 79, 79);
+
+}
+.login button
+ {
+   
+    background-color: var(--mainColor);
+}.register button{
+      background-color: var(--subColor);
+}
+
+
+#register{
+    color: var(--subColor);
+}
+h1
+{
+    color: var(--mainColor);
+}
+h3{
+
+    color: var(--subColor);
+}
+#p{
+color: var(--subColor);
+}
+table{
+    color: var(--mainColor);
+}

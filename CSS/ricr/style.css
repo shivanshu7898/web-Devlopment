@@ -6,6 +6,7 @@
   padding-left: 20px;
   padding-right: 30px;
   padding-bottom: 50px;
+
   display: grid;
 
   background: #d6f2fe80;
@@ -45,6 +46,7 @@
       border: 1px light gray solid;
       border-radius: 10px;
       border: none;
+      padding-left:30px;
     }
   }
   #col2 {
@@ -61,7 +63,7 @@
   display: flex;
   justify-content: center;
   gap: 30px;
-   padding-bottom: 20px;
+  padding-bottom: 20px;
   #col3 {
     input {
       width: 450px;
@@ -82,7 +84,7 @@
   }
 }
 .row3 {
-   padding-bottom: 20px;
+  padding-bottom: 20px;
   input {
     width: 685px;
     height: 50px;
@@ -93,7 +95,7 @@
 }
 .row4 {
   display: flex;
-   padding-bottom: 20px;
+  padding-bottom: 20px;
   justify-content: center;
   gap: 30px;
   #col5 {
@@ -147,8 +149,7 @@
     }
   }
 }
- .button {
-
+.button {
   width: 130px;
   height: 60px;
   color: white;
@@ -157,183 +158,137 @@
   border-radius: 30px;
   font-size: 18px;
   font-family: inter, sans-serif;
-  
 }
-.button:hover
-{
-  
+.button:hover {
 }
 
-header{
+header {
   position: sticky;
-  top: 0;
+  top: 0px;
+  height: fit-content;
+
   z-index: 100;
   background-color: white;
-
-
 }
 .header1 {
-  
-  padding-top: 10px;
-  padding-bottom: 30px;
+  padding: 25px;
+
+  margin-bottom: 50px;
+
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   gap: 30px;
- 
+
   #logo {
-    width: 150px;
-    height: 40px;
+    width: 157px;
+    height: 45px;
+    align-items: left;
+    padding-left: 50 px;
   }
-}
-.navbuttons {
-  #home {
-    border: none;
-    color: black;
-    background: none;
-    font-size: 15px;
-    font-family: inter, sans-serif;
-  }
-  #about {
-    border: none;
-    color: black;
-    background: none;
-    font-size: 15px;
-    font-family: inter, sans-serif;
-  }
-  #contact {
-    border: none;
-    color: black;
-    background: none;
-    font-size: 15px;
-    font-family: inter, sans-serif;
-  }
-  #courses {
-    border: none;
-    color: black;
-    background: none;
-    font-size: 15px;
-    font-family: inter, sans-serif;
+  .navbuttons {
+    gap: 20px;
+    padding-right: 300px;
+    #home {
+      border: none;
+      color: black;
+      background: none;
+      font-size: 18px;
+      padding-right: 25px;
+      font-family: inter, sans-serif;
+    }
+    #about {
+      border: none;
+      color: black;
+      background: none;
+      font-size: 18px;
+      padding-right: 25px;
+      font-family: inter, sans-serif;
+    }
+    #contact {
+      border: none;
+      color: black;
+      background: none;
+      font-size: 18px;
+      padding-right: 25px;
+      font-family: inter, sans-serif;
+    }
+    #courses {
+      border: none;
+      color: black;
+      background: none;
+      font-size: 18px;
+      padding-right: 25px;
+      font-family: inter, sans-serif;
+    }
   }
   #ide {
     border: none;
     color: black;
     background: none;
-    font-size: 15px;
+    font-size: 18px;
+    padding-right: 25px;
     font-family: inter, sans-serif;
   }
-}
-.callbuttons {
-  #login {
-    border: none;
-    color: black;
-    background: none;
-    font-size: 15px;
-    font-family: inter, sans-serif;
-  }
-  #signup {
-    border: none;
-    border-radius: 10px;
-    height: 40px;
-    width: 130px;
-    color: white;
-    background:#125785;
-    box-shadow: 10px 4px  #308cca;
-    
 
-    font-size: 15px;
-    font-family: inter, sans-serif;
+  .callbuttons {
+    #login {
+      border: none;
+      color: black;
+      background: none;
+      font-size: 18px;
+      font-family: inter, sans-serif;
+    }
+    #signup {
+      border: none;
+      border-radius: 10px;
+      height: 50px;
+      width: 150px;
+      color: white;
+      background: #125785;
+      box-shadow: 6px 5px #308cca;
+
+      font-size: 18px;
+      font-family: inter, sans-serif;
+    }
+    #signup:hover {
+      box-shadow: none;
+      transform: translate(3px, 3px);
+      transition: 2sec linear;
+    }
   }
-  #signup:hover{
-    box-shadow: none;
-  transform: translate(3px,3px);
-  transition: 2sec linear;
-  }
-  
 }
+footer{
+
  
-
-
-
-.footer {
-  margin-top: 100px;
-  border: 1px solid black;
-  background-color: #125785;
-  color: #fff;
-  padding-top: 40px;
-  padding: 40px 20px;
-  font-family: Arial, sans-serif;
+  background:#125785;
+  color: white;
+  padding: 50px;
 }
-
-.footer-container {
+.footer-container{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+  justify-content: center;
+  align-items: center;
+  #col1{
+    border: 1px solid black;
+    height: 200px;
+    width: 300px;
+   #logo{
+    width: 157px;
+    height: 45px;
+    align-items: left;
+    padding-left: 50 px;
 
-.footer-col {
-  flex: 1 1 220px;
-  margin: 15px;
-  #logo {
-    width: 150px;
-    height: 50px;
+   }
+
+  }
+   #col2{
+    
+  }
+   #col3{
+    
+  }
+   #col4{
     
   }
 }
-
-.footer-col h2
-{
-   margin-bottom: 15px;
-  color: #f1f1f1;
-}
-.footer-col h3 {
-  margin-bottom: 15px;
-  color: #f1f1f1;
-}
-
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-col ul li {
-  margin-bottom: 8px;
-}
-
-.footer-col ul li a {
-  color: #ddd;
-  text-decoration: none;
-}
-
-.footer-col ul li a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.social-icons a {
-  margin-right: 10px;
-  color: #ddd;
-  text-decoration: none;
-}
-
-.social-icons a:hover {
-  color: #fff;
-}
-
-.footer-bottom {
-  text-align: center;
-  border-top: 1px solid #444;
-  margin-top: 20px;
-  padding-top: 10px;
-  font-size: 14px;
-  display: flex;
-  gap: 700px;
-  #raj {
-    color: #fff;
-  }
-  #site {
-    color: #fff;
-  }
-
-}
-
