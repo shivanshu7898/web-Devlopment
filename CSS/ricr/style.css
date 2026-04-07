@@ -1,3 +1,6 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
 .container {
   width: 696px;
   height: 1000px;
@@ -6,8 +9,10 @@
   padding-left: 20px;
   padding-right: 30px;
   padding-bottom: 50px;
+  margin-bottom: 50px;
 
   display: grid;
+  box-shadow: 0px 10px 20px lightgray;
 
   background: #d6f2fe80;
   border: none;
@@ -15,6 +20,10 @@
   border-radius: 10px;
 
   justify-items: center;
+}
+.container:hover {
+  box-shadow: none;
+  transform: translate(1px, 1px);
 }
 .heading {
   #h1 {
@@ -36,9 +45,10 @@
 }
 .row1 {
   display: flex;
+
   padding-bottom: 20px;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   #col1 {
     input {
       width: 320px;
@@ -46,16 +56,19 @@
       border: 1px light gray solid;
       border-radius: 10px;
       border: none;
-      padding-left:30px;
+      margin-top: 10px;
+      padding-left: 30px;
     }
   }
   #col2 {
     input {
-      width: 330px;
+      width: 280px;
       height: 50px;
       border: 1px solid gray;
       border-radius: 10px;
       border: none;
+      margin-top: 10px;
+      padding-left: 30px;
     }
   }
 }
@@ -71,26 +84,32 @@
       border: 1px solid gray;
       border-radius: 10px;
       border: none;
+      margin-top: 10px;
+      padding-left: 30px;
     }
   }
   #col4 {
     input {
-      width: 200px;
+      width: 150px;
       height: 50px;
       border: 1px solid gray;
       border-radius: 10px;
       border: none;
+      margin-top: 10px;
+      padding-left: 30px;
     }
   }
 }
 .row3 {
   padding-bottom: 20px;
   input {
-    width: 685px;
+    width: 655px;
     height: 50px;
     border: 1px solid gray;
     border-radius: 10px;
     border: none;
+    margin-top: 10px;
+    padding-left: 30px;
   }
 }
 .row4 {
@@ -105,15 +124,19 @@
       border: 1px solid gray;
       border-radius: 10px;
       border: none;
+      margin-top: 10px;
+      padding-left: 30px;
     }
   }
   #col6 {
     input {
-      width: 330px;
+      width: 300px;
       height: 50px;
       border: 1px solid gray;
       border-radius: 10px;
       border: none;
+      margin-top: 10px;
+      padding-left: 30px;
     }
   }
 }
@@ -154,15 +177,19 @@
   height: 60px;
   color: white;
   background-color: black;
-  border: none;
+
   border-radius: 30px;
+
   font-size: 18px;
   font-family: inter, sans-serif;
 }
-.button:hover {
+.button:active {
+  transform: scale(1px, 1px, 1px);
+  background-color: #125785;
 }
 
 header {
+  width: 100%;
   position: sticky;
   top: 0px;
   height: fit-content;
@@ -170,15 +197,30 @@ header {
   z-index: 100;
   background-color: white;
 }
+.menu-toggle {
+  display: none;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  border-radius: 3px;
+}
 .header1 {
   padding: 25px;
 
   margin-bottom: 50px;
 
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
-  gap: 30px;
 
   #logo {
     width: 157px;
@@ -258,37 +300,357 @@ header {
     }
   }
 }
-footer{
-
- 
-  background:#125785;
-  color: white;
+footer {
   padding: 50px;
+
+  background-color: #125785;
 }
-.footer-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  #col1{
-    border: 1px solid black;
-    height: 200px;
-    width: 300px;
-   #logo{
+.footer-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto auto auto auto;
+  color: white;
+
+  .col {
+    height: 300px;
+    width: 200px;
+
+    margin: 50px;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+.col a {
+  color: white;
+  text-decoration: none;
+}
+.col1 {
+  padding: 20px;
+  margin: 50px;
+  height: 300px;
+  width: 400px;
+  #logo {
     width: 157px;
     height: 45px;
     align-items: left;
-    padding-left: 50 px;
+  }
+}
+.footer-bottom {
+  display: flex;
+  color: white;
+}
+#site {
+  align-items: center;
+  border: 1px solid black;
+}
 
-   }
+@media (max-width: 1024px) {
+  .header1 {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 
+    .navbuttons {
+      padding-right: 50px;
+
+      #home, #about, #contact, #courses {
+        font-size: 15px;
+        padding-right: 12px;
+      }
+    }
+
+    #ide {
+      font-size: 15px;
+      padding-right: 12px;
+    }
+
+    .callbuttons {
+      #login {
+        font-size: 15px;
+      }
+      #signup {
+        font-size: 15px;
+        width: 120px;
+        height: 42px;
+      }
+    }
   }
-   #col2{
-    
+
+  .container {
+    width: 90%;
+    height: auto;
   }
-   #col3{
-    
+
+  .row1, .row2, .row4 {
+    flex-wrap: wrap;
   }
-   #col4{
-    
+
+  .row1 #col1 input,
+  .row1 #col2 input {
+    width: 100%;
+  }
+
+  .row2 #col3 input,
+  .row2 #col4 input {
+    width: 100%;
+  }
+
+  .row3 input {
+    width: 100%;
+  }
+
+  .row4 #col5 select,
+  .row4 #col6 input {
+    width: 100%;
+  }
+
+  .row5 {
+    gap: 30px;
+  }
+
+  .row5 #col8 select,
+  .row5 #col9 select {
+    width: 100%;
+  }
+
+  .footer-container {
+    grid-template-columns: auto auto;
+  }
+
+  .col1 {
+    width: 100%;
+    margin: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .header1 {
+    flex-wrap: wrap;
+    padding: 15px;
+    margin-bottom: 10px;
+    position: relative;
+
+    .navbuttons {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      padding-right: 0;
+      padding-top: 10px;
+      order: 3;
+
+      #home, #about, #contact, #courses {
+        display: block;
+        text-align: left;
+        padding: 8px 0;
+        font-size: 16px;
+      }
+    }
+
+    .callbuttons {
+      order: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      #login {
+        font-size: 14px;
+      }
+      #signup {
+        font-size: 14px;
+        width: 110px;
+        height: 38px;
+      }
+    }
+
+    #ide {
+      display: none;
+    }
+  }
+
+  .menu-toggle:checked ~ .navbuttons,
+  .menu-toggle:checked + label + .navbuttons {
+    display: flex;
+  }
+
+  .header1 .navbuttons {
+    display: none;
+  }
+
+  input#menu-toggle:checked ~ * .navbuttons {
+    display: flex;
+  }
+
+  .container {
+    width: 95%;
+    height: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+  }
+
+  .heading {
+    #h1 {
+      font-size: 22px;
+      padding-top: 30px;
+    }
+    #p1 {
+      font-size: 13px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .row1 {
+    flex-direction: column;
+    gap: 15px;
+
+    #col1 input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #col2 input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .row2 {
+    flex-direction: column;
+    gap: 15px;
+
+    #col3 input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #col4 input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .row3 input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .row4 {
+    flex-direction: column;
+    gap: 15px;
+
+    #col5 select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #col6 input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .row5 {
+    flex-direction: column;
+    gap: 20px;
+
+    #col8 select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #col9 select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .col1 {
+    grid-column: 1 / -1;
+    width: auto;
+    margin: 10px;
+    height: auto;
+  }
+
+  .col {
+    width: auto !important;
+    margin: 10px !important;
+    height: auto !important;
+  }
+
+  footer {
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header1 {
+    padding: 10px;
+
+    #logo {
+      width: 120px;
+      height: 35px;
+    }
+
+    .callbuttons {
+      #login {
+        font-size: 12px;
+      }
+      #signup {
+        font-size: 12px;
+        width: 100px;
+        height: 35px;
+      }
+    }
+  }
+
+  .container {
+    width: 98%;
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .heading {
+    #h1 {
+      font-size: 18px;
+    }
+    #p1 {
+      font-size: 12px;
+    }
+  }
+
+  .button {
+    width: 110px;
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .col1 {
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .col {
+    margin: 5px !important;
+  }
+
+  footer {
+    padding: 20px 10px;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
   }
 }
