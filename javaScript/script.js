@@ -59,12 +59,12 @@
 // }
 
 
-let i = 1;
-do{
+// let i = 1;
+// do{
 
-    console.log(i*2);
-    i++;
-}while(i<10);
+//     console.log(i*2);
+//     i++;
+// }while(i<=10);
 
 
 
