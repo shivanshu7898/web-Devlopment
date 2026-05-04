@@ -7,6 +7,6 @@ function submit()
     document.getElementById("mydata").innerText=fn;
     document.getElementById("fullname").value = "";
 
-   
+   document.getElementById("cardhide").classList.remove("divhide");
 
 }
