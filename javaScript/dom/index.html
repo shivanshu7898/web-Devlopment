@@ -15,15 +15,50 @@
     />
   </head>
   <body>
-    <div class="d-flex justify-content-between m-3">
+    <div class="d-flex flex-column gap-4 m-3">
       <input type="text" placeholder="name" id="fullname" class="w-100 me-2" />
-      
-      <div class="btn bg-primary text-light" onclick="submit()">submit</div>
+      <input type="email" placeholder="email" id="email" class="w-100 me-2" />
+      <input
+        type="text"
+        placeholder="address"
+        id="address"
+        class="w-100 me-2"
+      />
+      <input
+        type="password"
+        placeholder="password"
+        id="password"
+        class="w-100 me-2"
+      />
+      <input
+        type="password"
+        placeholder="confirm password"
+        id="confirmPassword"
+        class="w-100 me-2"
+      />
+
+      <div class="d-flex justify-content-center">
+        <div class="btn bg-primary text-light" onclick="submit()">submit</div>
+      </div>
     </div>
     <div class="container border shadow rounded divhide" id="cardhide">
-      <span id="mydata">
-       
-      </span>
+      <span>name:</span>
+      <span id="mydata"> </span>
+      <br>
+
+      <span>email:</span>
+      <span id="mydata1"> </span>
+      <br>
+
+      <span>address:</span>
+      <span id="mydata2"> </span>
+      <br>
+
+      <span>Password:</span>
+      <span id="mydata3"> </span>
+      <br>
+      <span>confirmPassword:</span>
+      <span id="mydata4"> </span>
     </div>
 
     <script
