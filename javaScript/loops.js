@@ -28,3 +28,12 @@ for(let b = 1; b<=10; b++)
 {
     console.log(15+"*" +b+"="+(15*b));
 }
+
+
+
+// for each loops
+
+
+arr = [10,10,10,4,7,7];
+arr.forEach((element)=>{console.log(element);
+})
