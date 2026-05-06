@@ -53,8 +53,23 @@ let people = [
 // console.log(people[1]["name"]);
 // console.log(people[1].name);
 
-console.log(Object.keys(people));
-console.log(Object.values(people));
-;
+// console.log(Object.keys(people));
+// console.log(Object.values(people));
+// ;
+
+
+let arr = [12, 23, 89, 55, 77];
+console.log(arr.find((arr) => arr>20));
+console.log(arr.findIndex((arr) => arr>20));
+console.log(arr.findLastIndex((arr) => arr>20));
+console.log(arr.findLast((arr) => arr>20));
+console.log(arr.filter((arr) => arr>20));
+console.log(arr.find((arr) => arr>20));
+console.log(arr.slice(0,3));
+
+
+let p = "this is my class";
+console.log(p);
+console.log(p.split());
 
 
