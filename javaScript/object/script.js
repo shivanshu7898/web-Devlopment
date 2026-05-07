@@ -57,19 +57,20 @@ let people = [
 // console.log(Object.values(people));
 // ;
 
-
 let arr = [12, 23, 89, 55, 77];
-console.log(arr.find((arr) => arr>20));
-console.log(arr.findIndex((arr) => arr>20));
-console.log(arr.findLastIndex((arr) => arr>20));
-console.log(arr.findLast((arr) => arr>20));
-console.log(arr.filter((arr) => arr>20));
-console.log(arr.find((arr) => arr>20));
-console.log(arr.slice(0,3));
-
+console.log(arr.find((arr) => arr > 20));
+console.log(arr.findIndex((arr) => arr > 20));
+console.log(arr.findLastIndex((arr) => arr > 20));
+console.log(arr.findLast((arr) => arr > 20));
+console.log(arr.filter((arr) => arr > 20));
+console.log(arr.find((arr) => arr > 20));
+console.log(arr.slice(0, 3));
 
 let p = "this is my class";
 console.log(p);
 console.log(p.split());
+console.log(p.toUpperCase());
+console.log(p.charAt(2));
 
-
+let c = 3.5;
+console.log(c.toFixed(6));
