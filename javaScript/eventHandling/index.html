@@ -1,26 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <div id="bulb1">bulb</div>
+    <div id="btn">
+      <button id="bulbon" onclick="bulbon()">ON</button>
+      <button id="bulbon" onclick="bulbon1()">red</button>
+      <button id="bulbon" onclick="bulbon2()">yellow</button>
+      <button id="bulbon" onclick="bulbon3()">green</button>
+      <button id="bulbof" onclick="bulboff()">OFF</button>
 
+      <input type="color" id="bulbinput" />
+    </div>
 
-<div id="bulb1">bulb</div>
-<div id="btn">
-    <button id="bulbon" onclick="bulbon()">ON</button>
-    <button id="bulbon" onclick="bulbon1()">red</button>
-    <button id="bulbon" onclick="bulbon2()">yellow</button>
-    <button id="bulbon" onclick="bulbon3()">green</button>
-<button id="bulbof" onclick="bulboff()">OFF</button>
-
-</div>
-
-
-
+    <hr />
+    <div class="container-sm d-flex border border-1 border-black ">
+      <div class="w-75" id="box">
+        <h1 id="h1">This is heading</h1>
+        <p id="p">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+          accusantium maiores nostrum praesentium necessitatibus cum ducimus
+          eum. Harum dolorum exercitationem optio. Earum exercitationem eligendi
+          perferendis. Distinctio quae aliquid sapiente aspernatur.
+        </p>
+      </div>
+      <div class="w-50 border-start border-black">
+        <div class="d-flex"><h6>background color</h6>
+            <input type="color" id="boxcolor1">
+        </div>
+        <div class="d-flex">
+            <h6>Heading color</h6>
+            <input type="color" id="boxcolor2">
+        </div>
+        <div class="d-flex">
+            <h6>Paragraph color</h6>
+            <input type="color" id="boxcolor3">
+        </div>
+        <div >
+            <button onclick="reset()">reset all</button>
+        </div>
+      </div>
+    </div>
+ <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
