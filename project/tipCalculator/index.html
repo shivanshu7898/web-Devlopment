@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header">TIP CALCULATOR</div>
+      <div class="card-body">
+        <!-- Bill Amount -->
+        <div class="field-group">
+          <label>Bill Amount</label>
+          <div class="input-wrapper">
+            <input
+              type="number"
+              id="billAmount"
+              placeholder="Amount to be paid"
+              min="0"
+            />
+            <span class="rupee-symbol">₹</span>
+          </div>
+          <span class="error" id="billError"
+            >Please enter a valid bill amount.</span
+          >
+        </div>
+
+        <!-- Service Quality -->
+        <div class="field-group">
+          <label>How was the service?</label>
+          <div class="select-wrapper">
+            <select id="serviceQuality">
+              <option value="" disabled selected>Select</option>
+              <option value="5">Amazing (5%)</option>
+              <option value="10">Good (10%)</option>
+              <option value="15">Great (15%)</option>
+              <option value="20">Excellent (20%)</option>
+              <option value="25">Outstanding (25%)</option>
+            </select>
+          </div>
+          <span class="error" id="serviceError"
+            >Please select service quality.</span
+          >
+        </div>
+
+        <!-- Number of Persons -->
+        <div class="field-group">
+          <label>Total number of persons</label>
+          <input
+            type="number"
+            class="plain-input"
+            id="persons"
+            placeholder="Number of people sharing the bill"
+            min="1"
+          />
+          <span class="error" id="personsError"
+            >Please enter a valid number of persons.</span
+          >
+        </div>
+
+        <!-- Calculate Button -->
+        <button class="btn-calculate" onclick="calculate()">Calculate</button>
+
+        <!-- Result Box -->
+        <div class="result-box" id="resultBox">
+          <div class="result-row">
+            <span>Bill Amount</span>
+            <span id="resBill">₹0</span>
+          </div>
+          <div class="result-row">
+            <span>Tip %</span>
+            <span id="resTipPct">0%</span>
+          </div>
+          <div class="result-row">
+            <span>Tip Amount</span>
+            <span id="resTip">₹0</span>
+          </div>
+          <div class="result-row">
+            <span>Total Bill</span>
+            <span id="resTotal">₹0</span>
+          </div>
+          <div class="result-row">
+            <span>Persons</span>
+            <span id="resPersons">0</span>
+          </div>
+          <div class="result-row total">
+            <span>Per Person</span>
+            <span id="resPerPerson">₹0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
