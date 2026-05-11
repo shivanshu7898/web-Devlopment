@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <div class="container">
+    <h1>Salary Calculator</h1>
+    
+
+    <div class="row">
+      <label for="ctc">Total CTC (₹ per month)</label>
+      <input type="number" id="ctc"  min="0" step="1000">
+    </div>
+
+    <div class="row">
+      <label for="basicPct">Basic Salary % of CTC</label>
+      <input type="number" id="basicPct"  min="1" max="100" step="1">
+    </div>
+
+    <button> Calculate Gross Salary</button>
+
+    <div id="result">
+      <hr class="divider">
+      <div class="cards" id="cards"></div>
+      <div id="compliance"></div>
+      <p class="note">* Employer PF = 12% of basic. Employee PF = 12% of basic. Professional tax ≈ ₹200/month. In-hand = Gross − Employee PF − Professional tax.</p>
+    </div>
+  </div>
+</body>
+</html>
