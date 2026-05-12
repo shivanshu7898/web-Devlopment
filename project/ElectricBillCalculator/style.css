@@ -1,0 +1,42 @@
+body {
+  background-color: #f0f4f8;
+  font-family: Arial, sans-serif;
+}
+h2 {
+  color: #2c3e50;
+}
+.btn-success {
+  background-color: #27ae60;
+  border: none;
+}
+.btn-success:hover {
+  background-color: #1e8449;
+}
+#result-section {
+  display: none;
+}
+.bill-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+}
+.bill-row .label {
+  color: #555;
+}
+.bill-row .amount {
+  font-weight: 600;
+  color: #2c3e50;
+}
+.grand-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #27ae60;
+}
+.text-danger {
+  font-size: 0.875rem;
+}
