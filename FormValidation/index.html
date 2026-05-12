@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>
+        <input type="text" id="fullName" placeholder=" Enter your Name" />
+        <span id="errorName" class="error"></span>
+      </div>
+      <div>
+        <input type="number" id="number" placeholder=" Enter your number" />
+        <span id="errorNumber" class="error"></span>
+      </div>
+      <div>
+        <input type="email" id="email" placeholder=" Enter your email" />
+        <span id="errorEmail" class="error"></span>
+      </div>
+      <div>
+        <input
+          type="password"
+          id="password"
+          placeholder=" Enter your password"
+          required
+        />
+      </div>
+      <div>
+        <button type="submit" class="btn" onclick="submit()">Submit</button>
+      </div>
+    </div>
+    <div id="data"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
