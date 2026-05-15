@@ -15,22 +15,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="text-center bg-danger text-white p-3">
+    <div
+      class="text-center bg-danger text-white p-3 position-sticky top-0 shadow"
+    >
       <h1>Coaching Institute Registration Form</h1>
     </div>
-    <div class="container p-3 mt-3 border border-1 rounded-2 bg-light">
+    <div
+      class="container p-3 mt-3 mb-3 border border-1 rounded-2 bg-light shadow"
+    >
       <form>
         <div class="border border-1 p-3 rounded-3 bg-white">
-          <h3>personal details</h3>
+          <h3 class="fw-bolder">personal details</h3>
 
           <label for="fullName">Name</label>
           <input
             class="form-control m-1"
             type="text"
             id="fullName"
-            name="fullName"
             placeholder="Enter a Full Name"
+            required
           />
+          <div>
+            <div id="nameerror" class="text-danger ps-2"></div>
+          </div>
 
           <label for="Email">Email</label>
           <input
@@ -39,7 +46,11 @@
             id="Email"
             name="Email"
             placeholder="Enter Email"
+            required
           />
+          <div>
+            <div id="emailError" class="text-danger ps-2"></div>
+          </div>
 
           <label for="MobileNumber">Mobile Number</label>
           <input
@@ -48,7 +59,11 @@
             id="MobileNumber"
             name="MobileNumber"
             placeholder="Enter your Mobile Number"
+            required
           />
+           <div>
+            <div id="mobileError" class="text-danger ps-2"></div>
+          </div>
 
           <label for="DOB">DOB</label>
           <input
@@ -70,7 +85,9 @@
               name="Qualification"
               id="Qualification"
               class="form-control"
+              required
             >
+             
               <option value="10th">10th pass</option>
               <option value="10th">12th pass</option>
               <option value="Graduation">Graduation</option>
@@ -85,7 +102,11 @@
               name="Grade"
               placeholder="Grade in Last Qualification"
               class="form-control"
+              required
             />
+            <div>
+            <div id="gradeError" class="text-danger ps-2"></div>
+          </div>
           </div>
         </div>
         <div class="Course border border-1 p-3 mt-4 rounded-3 bg-white">
@@ -96,6 +117,7 @@
               name="PreferredCourse"
               id="PreferredCourse"
               class="form-control"
+              required
             >
               <option value="NEET">NEET</option>
               <option value="IIT-JEE">IIT-JEE</option>
@@ -104,36 +126,94 @@
             </select>
           </div>
           <div class="m-2">
-            <label for="Preference"> Batch Timing Preference:</label>
-            <label> <input type="checkbox" /> Morning </label>
+            <p>Batch Timing Preference:</p>
 
-            <label> <input type="checkbox" /> Afternoon </label>
+            <div>
+              <input type="checkbox" id="morning" />
+              <label for="morning">Morning</label>
 
-            <label> <input type="checkbox" /> Evening </label>
+              <input type="checkbox" id="afternoon" />
+              <label for="afternoon">Afternoon</label>
 
-            <label> <input type="checkbox" /> Weekend </label>
+              <input type="checkbox" id="evening" />
+              <label for="evening">Evening</label>
+
+              <input type="checkbox" id="weekend" />
+              <label for="weekend">Weekend</label>
+            </div>
           </div>
         </div>
+         <div class="Adrees border border-1 p-3 mt-4 rounded-3 bg-white">
+          <h3 class="mt-3">Address</h3>
+            <label for="address"></label>
+            <textarea
+              class="s1 form-control"
+              id="address"
+              rows="3"
+              placeholder="Enter Your fulll Address..."
+            ></textarea>
+          </div>
         <div class="GuardianName border border-1 p-3 mt-4 rounded-3 bg-white">
           <h3 class="mt-3">Guardian’s Details</h3>
           <div>
             <label for="gname">Guardian’s Full Name:</label>
             <input
-              class="form-control "
+              class="form-control"
               type="text"
               id="gname"
               placeholder="Full Name"
+              required
             />
+             <div>
+            <div id="gError" class="text-danger ps-2"></div>
           </div>
-          <br />
+
+          </div>
+
           <div>
             <label for="number"> Guardian’s Contact Number:</label>
             <input
-              class="form-control "
+              class="form-control"
               type="number"
               id="number"
               placeholder="Contact Number"
+              required
             />
+            <div>
+            <div id="gmError" class="text-danger ps-2"></div>
+          </div>
+          </div>
+        </div>
+        <div class="aboutus border border-1 p-3 mt-4 rounded-3 bg-white">
+          <h3 class="mt-3">Additional Information:-</h3>
+
+          <div>
+            <label for="source">How did you hear about us? </label>
+            <select class="form-control" id="source">
+              <option value="select">Select</option>
+              <option value="Friends">Friends</option>
+              <option value="Online Ad">Online Ad</option>
+              <option value="Newspaper">Newspaper</option>
+              <option value="Social Media">Social Media</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="specialReq">Special Requirements (Optional) </label>
+            <textarea
+              class="s1 form-control"
+              id="sourceReq"
+              rows="3"
+              placeholder="Specify any additional needs..."
+            ></textarea>
+          </div>
+          <div>
+            <button class="btn btn-danger" type="button" onclick="formSubmit()">
+              Submit
+            </button>
+            <button class="btn btn-light" type="reset" onclick="formReset()">
+              Reset
+            </button>
           </div>
         </div>
       </form>
