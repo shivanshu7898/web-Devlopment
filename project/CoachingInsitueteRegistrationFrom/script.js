@@ -8,7 +8,7 @@ function formSubmit() {
   else {
     document.getElementById("nameerror").innerText = "Invalid Name";
   }
-  let name1 = document.getElementById("fullName").value=" ";
+  
 
 //   let guardianName = document.getElementById("GuardianName").value;
 
