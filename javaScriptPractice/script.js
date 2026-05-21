@@ -1,14 +1,15 @@
-let p = document.querySelectorAll("p");
+let box = document.querySelector("div");
 
-
-p.forEach(function(item){
-    item.addEventListener("mouseover",()=>{
-        item.style.color= "red";
-    })
-    item.addEventListener("mouseout",()=>{
-        item.style.color= "";
-    })
+box.addEventListener("mousemove",(event)=>{
+   console.log(event);
+   
+   box.style.top = event.clientY+ "px";
+   box.style.left = event.clientX + "px";
+   
 })
+
+
+
 
 
 
