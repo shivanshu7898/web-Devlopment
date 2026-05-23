@@ -1,15 +1,12 @@
-let box = document.querySelector("div");
+let form = document.querySelector("form");
 
-box.addEventListener("mousemove",(event)=>{
-   console.log(event);
-   
-   box.style.top = event.clientY+ "px";
-   box.style.left = event.clientX + "px";
-   
+form.addEventListener("submit", (event)=>{
+     event.preventDefault();
+     
 })
 
 
-
+ 
 
 
 
