@@ -1,5 +1,5 @@
 
-const API_KEY = "";
+const API_KEY = "d1f3dcc2b7095811c769a7ce19b270e2";
 let tempC = null, feelsC = null, unit = 'C';
  
 const icons = {

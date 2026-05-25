@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Currency Converter</title>
+</head>
+<body>
+
+  <h2>INR Currency Converter</h2>
+
+  <label>
+    Amount INR:
+    <input type="number" id="amount" value="100">
+  </label>
+
+  <br><br>
+
+  <label>
+    Currency:
+    <select id="currency">
+      <option value="USD">USD</option>
+      <option value="AED">AED</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="AMD">AMD</option>
+    </select>
+  </label>
+
+  <br><br>
+
+  <button onclick="get()">Convert</button>
+
+  <p id="result"></p>
+
+ <script src="script.js"></script>
+</body>
+</html>
