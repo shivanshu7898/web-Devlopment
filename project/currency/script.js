@@ -6,7 +6,6 @@ async function get() {
 
   const data = await response.json();
   console.log(data);
-  
 
   let rate = data.rates[currency];
 
