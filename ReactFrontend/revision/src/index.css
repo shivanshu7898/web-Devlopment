@@ -6,6 +6,7 @@ body,
 }
 
 body {
+  padding: 200px;
   font-family: system-ui, sans-serif;
-  background: #f8f9fa;
+background: #000;
 }

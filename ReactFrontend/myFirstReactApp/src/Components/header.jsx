@@ -9,12 +9,15 @@ function Header() {
         <div className="d-flex gap-3 " > 
           <Link to="/">Home</Link>
           <Link to={"/about"}>About</Link>
-          <Link to={"/login"}>login</Link> 
-          <Link to={"/register"}>Register</Link>
+         
         </div>
         <div className="d-flex gap-2">
-            <button className="btn btn-primary btn-outline-light">login</button>
-            <button className="btn btn-outline-primary">Register</button>
+          <Link className="btn btn-primary btn-outline-light" to="/login">
+            Login
+          </Link>
+          <Link className="btn btn-outline-primary" to="/register">
+            Register
+          </Link>
         </div>
       </div>
     </header>
