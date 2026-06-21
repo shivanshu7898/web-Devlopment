@@ -35,10 +35,10 @@ const Products = () => {
           <img src={loading} alt="" className="w-50" />
         </div>
       ) : (
-        <div className="p-10 grid grid-cols-4 gap-5">
+        <div className="p-10 flex flex-wrap gap-5">
           {products.length > 0 &&
             products.map((product, index) => (
-              <div className="w-75 border rounded h-100 p-3" key={index}>
+              <div className="w-75 shadow  rounded h-100 p-3 " key={index}>
                 <div className="w-full h-40">
                   <img
                     src={product.image}
