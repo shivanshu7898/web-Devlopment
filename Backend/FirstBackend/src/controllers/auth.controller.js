@@ -1,16 +1,21 @@
+import { decrypt } from "dotenv";
 import User from "../models/user.model.js";
+import bcrypt from "bcrypt";
 
 export const RegisterUser = async (req, res, next) => {
   try {
     const { fullName, email, password, phone, gender, dob } = req.body;
 
     if (!fullName || !email || !password || !phone || !gender || !dob) {
+      const error = new Error("All fields required");
+      error.statusCode = 400;
+      return next(error);
     }
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      res.status(409).json({ message: "Email Already Registered" });
-      return;
+      const error = new Error("Email Already Registered");
+      error.statusCode = 409;
+      return next(error);
     }
 
     const photoUrl = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
@@ -19,22 +24,22 @@ export const RegisterUser = async (req, res, next) => {
       url: photoUrl,
       publicId: null,
     };
+    const SALT = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, SALT);
 
     const newUser = await User.create({
       fullName,
       email,
-      password,
+      password: hashedPassword,
       phone,
       gender,
       dob,
       photo,
     });
-
-    res.status(201).json({ message: "User Created Successfully" });
+    res.status(200).json({ message: "User Registered Successfully" });
   } catch (error) {
     console.log(error.message);
-
-    res.status(500).json({ message: "Internal Server Error" });
+    next(error);
   }
 };
 
@@ -46,29 +51,33 @@ export const LoginUser = async (req, res, next) => {
       error.statusCode = 400;
       return next(error);
     }
+    
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-      const error = new Error("Email not register");
+      const error = new Error("Email not Registered");
       error.statusCode = 404;
       return next(error);
     }
+   
 
-    if (password != existingUser.password) {
-      const error = new Error("password not verify");
+    const isVerified = await bcrypt.compare(password, existingUser.password)    
+
+    if (!isVerified) {
+      const error = new Error("Incorrect Password");
       error.statusCode = 401;
       return next(error);
     }
-
+    
     res.status(200).json({
-      message: "welcome Back",
+      message: "Welcome Back",
       data: existingUser,
     });
-  } catch (error) {
+  } catch {
     console.log(error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    next();
   }
 };
 
 export const LogoutUser = (req, res) => {
-  res.json({ message: "Logout Successfull from Controller" });
+  res.json({ message: "Logout Successfull from auth controller" });
 };
