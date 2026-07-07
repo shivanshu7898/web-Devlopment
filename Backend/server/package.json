@@ -1,9 +1,9 @@
 {
-  "name": "firstbackend",
+  "name": "server",
   "version": "1.0.0",
-  "description": "First Backend Project Just For Learning",
+  "description": "this is Cravings server",
   "license": "ISC",
-  "author": "Shivanshu Soni",
+  "author": "shiv",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -11,12 +11,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "bcrypt": "^6.0.0",
-    "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.7.2"
-  },
-  "devDependencies": {
     "nodemon": "^3.1.14"
   }
 }
