@@ -10,12 +10,15 @@ export const RegisterUser = async (req, res, next) => {
       const error = new Error("All fields required");
       error.statusCode = 400;
       return next(error);
+      return(error);
     }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       const error = new Error("Email Already Registered");
       error.statusCode = 409;
       return next(error);
+      return(error);
+      
     }
 
     const photoUrl = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
