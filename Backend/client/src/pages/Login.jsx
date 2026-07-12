@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { data, Link, useNavigate } from 'react-router-dom'
 import api from '../config/connect.js'
+import pizza from "../assets/image.png"
 
 
 const Login = () => {
@@ -56,7 +57,7 @@ const Login = () => {
         <div className="flex  p-10 py-20">
           <div className="bg-amber-50 w-100 p-4 flex flex-col gap-6 rounded-2xl shadow-2xl">
             <div className="text-center">
-              <h1 className="text-3xl font-semibold text-(--color-primary)">Welcome Back</h1>
+              <h1 className="text-3xl font-semibold text-(--color-primary) flex justify-center">WELC<img src={pizza} alt="" className='w-8 h-8 animate-spin [animation-duration:6s]' />ME</h1>
               <p className="opacity-60">Login to your Cravings account</p>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
