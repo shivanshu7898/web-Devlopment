@@ -23,7 +23,9 @@ export const RegisterUser = async (req, res, next) => {
       password,
     });
 
-    res.status(201).json({ message: "user register successfully" });
+    res.status(201).json({ message: "user register successfully"});
+   
+    
   } catch (error) {
     console.log(error.message);
   }
@@ -54,7 +56,8 @@ export const Login = async (req, res, next) => {
     }
 
     return res.status(200).json({
-      message: "Login Successful",
+      message: "Login Successful"
+      ,data:existingUser
     });
 
   } catch (error) {

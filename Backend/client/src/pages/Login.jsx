@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { data, Link, useNavigate } from 'react-router-dom'
 import api from '../config/connect.js'
 
 
@@ -9,48 +9,47 @@ const Login = () => {
     Email: "",
     password: "",
   });
-  const [errors , setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
-  const validation = (formData)=>{
+  const validation = (formData) => {
 
-    const newErrors= {};
-    if(!formData.Email.trim()){
-      newErrors.Email ="Email Required;"
+    const newErrors = {};
+    if (!formData.Email.trim()) {
+      newErrors.Email = "Email Required;"
     }
-    if(!formData.password.trim()){
-      newErrors.password ="Password Required;"
+    if (!formData.password.trim()) {
+      newErrors.password = "Password Required;"
     }
     return newErrors;
   }
-   const handleChange = (e) => {
-      setFormData({
-        ...formData, [e.target.name]: e.target.value,
-      });
-    };
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-       setErrors({});
-     
-      const validationErrors = validation(formData);
-  
-      if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
-        return;
-      }
-      try {
-        const res = await api.post("/auth/login", formData);
-       alert(res.data.message);
-       navigate("/User-Dashboard")
-      } catch (error) {
-        alert(error.response.data.message);
-      }
-    };
+  const handleChange = (e) => {
+    setFormData({
+      ...formData, [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
+
+    const validationErrors = validation(formData);
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    try {
+      const res = await api.post("/auth/login", formData);
+      alert(res.data.message);
+      sessionStorage.setItem("user", JSON.stringify(res.data.data));
+      // console.log(res.data.data);
 
 
 
-
-
-
+      navigate("/User-Dashboard", { replace: true })
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
   return (
     <>
       <div id="foodTable">
@@ -60,7 +59,7 @@ const Login = () => {
               <h1 className="text-3xl font-semibold text-(--color-primary)">Welcome Back</h1>
               <p className="opacity-60">Login to your Cravings account</p>
             </div>
-            <form  onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <label htmlFor="Email">Enter your Email</label>
               <input
 
@@ -71,13 +70,13 @@ const Login = () => {
                 placeholder="Enter your Email"
                 className="border p-2  "
               />
-              
+
               <label htmlFor="password">Enter your password</label>
               <input
                 type="password"
                 name="password"
                 id="password"
-                 onChange={handleChange}
+                onChange={handleChange}
                 placeholder="Enter your password"
                 className="border p-2"
               />
