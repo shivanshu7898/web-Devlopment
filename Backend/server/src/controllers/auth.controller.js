@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import genToken from "../utils/auth.service.js";
 
 export const RegisterUser = async (req, res, next) => {
   try {
@@ -18,17 +19,15 @@ export const RegisterUser = async (req, res, next) => {
     }
 
     const SALT = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password,SALT);
+    const hashedPassword = await bcrypt.hash(password, SALT);
     const NewUser = await User.create({
       fullName,
       Email,
       number,
-      password:hashedPassword,
+      password: hashedPassword,
     });
 
-    res.status(201).json({ message: "user register successfully"});
-   
-    
+    res.status(201).json({ message: "user register successfully" });
   } catch (error) {
     console.log(error.message);
   }
@@ -52,24 +51,28 @@ export const Login = async (req, res, next) => {
       return next(error);
     }
 
-    const isVerified = await bcrypt.compare(password,existingUser.password)
+    const isVerified = await bcrypt.compare(password, existingUser.password);
     if (!isVerified) {
       const error = new Error("Invalid Password");
       error.statusCode = 401;
       return next(error);
     }
+    const token = genToken(existingUser._id);
 
-    return res.status(200).json({
-      message: "Login Successful"
-      ,data:{
-       fullName:existingUser.fullName,
-       Email: existingUser.Email,
-        number:existingUser.number,
-      }
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
+    return res.status(200).json({
+      message: "Login Successful",
+      data: {
+        fullName: existingUser.fullName,
+        Email: existingUser.Email,
+        number: existingUser.number,
+      },
+    });
   } catch (error) {
     next(error);
   }
 };
-

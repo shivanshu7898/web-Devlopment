@@ -6,6 +6,11 @@ import pizza from "../assets/image.png"
 
 const Login = () => {
   const navigate = useNavigate();
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  if (user) {
+    return <Navigate to="/User-Dashboard" replace />;
+  }
   const [formData, setFormData] = useState({
     Email: "",
     password: "",
