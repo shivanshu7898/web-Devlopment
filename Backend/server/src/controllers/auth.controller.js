@@ -4,9 +4,9 @@ import genToken from "../utils/auth.service.js";
 
 export const RegisterUser = async (req, res, next) => {
   try {
-    const { fullName, Email, number, password } = req.body;
+    const { fullName, Email,number, dob ,password  } = req.body;
 
-    if (!fullName || !Email || !password || !number) {
+    if (!fullName || !Email || !password || !number ||!dob) {
       const error = new Error("All fields required");
       error.statusCode = 400;
       return next(error);
@@ -18,6 +18,13 @@ export const RegisterUser = async (req, res, next) => {
       return next(error);
     }
 
+    const photoUrl = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
+
+    const photo = {
+      url: photoUrl,
+      publicId: null,
+    };
+
     const SALT = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, SALT);
     const NewUser = await User.create({
@@ -25,6 +32,8 @@ export const RegisterUser = async (req, res, next) => {
       Email,
       number,
       password: hashedPassword,
+      dob,
+      photo,
     });
 
     res.status(201).json({ message: "user register successfully" });
@@ -66,13 +75,28 @@ export const Login = async (req, res, next) => {
 
     return res.status(200).json({
       message: "Login Successful",
-      data: {
-        fullName: existingUser.fullName,
-        Email: existingUser.Email,
-        number: existingUser.number,
-      },
+      
     });
   } catch (error) {
     next(error);
   }
 };
+
+
+export const Logout = (req, res, next)=>{
+
+ try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: false, 
+      sameSite: "lax",
+    });
+
+    res.status(200).json({
+      message: "Logout Successfully",
+    });
+  } catch (error) {
+    next(error);
+  };
+};
+

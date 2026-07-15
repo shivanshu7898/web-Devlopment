@@ -4,13 +4,16 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import UserDashboard from "./components/userDashboard/userDashboard";
+import CustomerDashboard from "./pages/dashboard/customerDashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {Toaster} from "react-hot-toast"
+
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <Toaster />
       <Navbar />
      
         <Routes>
@@ -18,7 +21,9 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/User-Dashboard" element={<UserDashboard />} />
+          <Route path="/Customer-Dashboard" element={<CustomerDashboard />} />
+          <Route path="/Register" element={<Register />} />
+          
         </Routes>
        
       </BrowserRouter>

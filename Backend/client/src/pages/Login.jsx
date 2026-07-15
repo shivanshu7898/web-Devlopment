@@ -1,16 +1,33 @@
-import React, { useState } from 'react'
-import { data, Link, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import api from '../config/connect.js'
 import pizza from "../assets/image.png"
+import toast from 'react-hot-toast';
+
 
 
 const Login = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await api.get("/user/profile");
 
-  if (user) {
-    return <Navigate to="/User-Dashboard" replace />;
-  }
+        if (res.data.user) {
+          navigate("/");
+        }
+      } catch (error) {
+        // user login nahi hai
+      }
+    };
+
+    checkUser();
+  }, []);
+
+  const [IsLoading, setIsLoading] = useState(false);
+
+
+
   const [formData, setFormData] = useState({
     Email: "",
     password: "",
@@ -44,16 +61,15 @@ const Login = () => {
       return;
     }
     try {
+      setIsLoading(true);
       const res = await api.post("/auth/login", formData);
-      alert(res.data.message);
-      sessionStorage.setItem("user", JSON.stringify(res.data.data));
-      // console.log(res.data.data);
-
-
-
-      navigate("/User-Dashboard", { replace: true })
+      toast.success(res.data.message);
+      navigate("/Customer-Dashboard", { replace: true });
     } catch (error) {
-      alert(error.response.data.message);
+      toast.error(error?.response?.data?.message || "Login failed");
+    }
+    finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -104,15 +120,15 @@ const Login = () => {
               <div>
                 <button
                   type="submit"
-                  className=" w-full p-2.5 rounded bg-(--color-primary) text-white hover:opacity-90"
+                  className=" w-full p-2.5 rounded bg-[var(--color-primary)] text-white hover:opacity-90"
                 >
-                  Login
+                  {IsLoading ? "login..." : "login"}
                 </button>
                 <h1 className="text-center mt-1">
                   Do you have account?
                   <Link
                     to="/Register"
-                    className="text-(--color-primary) hover:underline"
+                    className="text-[var(--color-primary)] hover:underline"
                   >
                     Create an account
                   </Link>

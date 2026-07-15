@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 const protect = (req, res, next) => {
   try {
     const token = req.cookies.token;
+    console.log("api hit hui hai");
+    
 
     if (!token) {
       return res.status(401).json({

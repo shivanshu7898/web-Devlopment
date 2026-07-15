@@ -10,32 +10,38 @@ const Register = () => {
     fullName: "",
     Email: "",
     number: "",
+    dob: "",
+
     password: "",
     confirmPassword: "",
   });
 
 
-  const [errors , setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
 
-  const validation = (formData)=>{
+  const validation = (formData) => {
 
-    const newErrors= {};
+    const newErrors = {};
 
-    if(!formData.fullName.trim()){
-      newErrors.fullName ="FullName Required;"
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "FullName Required;"
     }
-    if(!formData.Email.trim()){
-      newErrors.Email ="Email Required;"
+    if (!formData.Email.trim()) {
+      newErrors.Email = "Email Required;"
     }
-    if(!formData.number.trim()){
-      newErrors.number ="Number Required;"
+    if (!formData.number.trim()) {
+      newErrors.number = "Number Required;"
     }
-    if(!formData.password.trim()){
-      newErrors.password ="Password Required;"
+
+    if (!formData.dob.trim()) {
+      newErrors.dob = "dob Required;"
     }
-    if(formData.password !== formData.confirmPassword){
-      newErrors.confirmPassword ="password do not match"
+    if (!formData.password.trim()) {
+      newErrors.password = "Password Required;"
+    }
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "password do not match"
     }
     if (!formData.confirmPassword)
       newErrors.confirmPassword = "Please confirm your password";
@@ -51,8 +57,8 @@ const Register = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-     setErrors({});
-   
+    setErrors({});
+
     const validationErrors = validation(formData);
 
     if (Object.keys(validationErrors).length > 0) {
@@ -61,7 +67,7 @@ const Register = () => {
     }
     try {
       const res = await api.post("/auth/register", formData);
-     alert(res.data.message);
+      alert(res.data.message);
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -101,7 +107,7 @@ const Register = () => {
               />
 
               {
-                errors.Email&& <span className="text-sm pb-3 text-red-500">{errors.Email}</span>
+                errors.Email && <span className="text-sm pb-3 text-red-500">{errors.Email}</span>
               }
               <input
                 type="number"
@@ -112,9 +118,23 @@ const Register = () => {
                 value={formData.number}
                 onChange={handleChange}
               />
-               {
-                errors.number&& <span className="text-sm pb-3 text-red-500">{errors.number}</span>
+              {
+                errors.number && <span className="text-sm pb-3 text-red-500">{errors.number}</span>
               }
+
+              <input
+                type="date"
+                name="dob"
+                id="dob"
+
+                className="border p-2"
+                value={formData.dob}
+                onChange={handleChange}
+              />
+              {
+                errors.dob && <span className="text-sm pb-3 text-red-500">{errors.dob}</span>
+              }
+
               <input
                 type="password"
                 name="password"
@@ -124,8 +144,8 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
-               {
-                errors.password&& <span className="text-sm pb-3 text-red-500">{errors.password}</span>
+              {
+                errors.password && <span className="text-sm pb-3 text-red-500">{errors.password}</span>
               }
               <input
                 type="password"
@@ -136,8 +156,8 @@ const Register = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
-               {
-                errors.confirmPassword&& <span className="text-sm pb-3 text-red-500">{errors.confirmPassword}</span>
+              {
+                errors.confirmPassword && <span className="text-sm pb-3 text-red-500">{errors.confirmPassword}</span>
               }
               <div className="flex">
                 <input
