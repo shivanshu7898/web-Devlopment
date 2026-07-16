@@ -79,7 +79,7 @@ function Navbar() {
 
           <Link
             to="/Register"
-            className="border px-2.5 py-1 rounded hover:bg-[var(--color-primary)] text-amber-50"
+            className="border px-2.5 py-1 rounded  hover:bg-var(--color-primary) text-amber-50"
           >
             Register
           </Link>
