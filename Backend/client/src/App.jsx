@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import CustomerDashboard from "./pages/dashboard/customerDashboard";
+import RiderDashboard from "./pages/dashboard/riderDashboard";
+import RestaurantDashboard from "./pages/dashboard/restaurantDashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {Toaster} from "react-hot-toast"
 
@@ -18,11 +20,12 @@ function App() {
      
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Customer-Dashboard" element={<CustomerDashboard />} />
-          <Route path="/Register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+          <Route path="/rider-dashboard" element={<RiderDashboard />} />
+          <Route path="/restaurant-dashboard" element={<RestaurantDashboard />} />
+          <Route path="/register" element={<Register />} />
           
         </Routes>
        

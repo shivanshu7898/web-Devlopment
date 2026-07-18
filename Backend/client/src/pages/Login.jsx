@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 
 
 
+
 const Login = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -13,8 +14,11 @@ const Login = () => {
       try {
         const res = await api.get("/user/profile");
 
-        if (res.data.user) {
-          navigate("/");
+        const existingUser = res.data?.data;
+        if (existingUser) {
+          if (existingUser.userType === "restaurant") navigate("/restaurant-dashboard");
+          else if (existingUser.userType === "rider") navigate("/rider-dashboard");
+          else navigate("/customer-dashboard");
         }
       } catch (error) {
         // user login nahi hai
@@ -43,6 +47,7 @@ const Login = () => {
     if (!formData.password.trim()) {
       newErrors.password = "Password Required;"
     }
+
     return newErrors;
   }
   const handleChange = (e) => {
@@ -62,10 +67,25 @@ const Login = () => {
     }
     try {
       setIsLoading(true);
+
       const res = await api.post("/auth/login", formData);
+
       toast.success(res.data.message);
-      navigate("/Customer-Dashboard", { replace: true });
-    } catch (error) {
+
+      const user = res.data?.data;
+      // fallback: if server did not return user, fetch profile
+      const finalUser = user || (await api.get("/user/profile")).data?.data;
+
+      if (finalUser) {
+        finalUser.userType === "restaurant" && navigate("/restaurant-dashboard");
+        finalUser.userType === "customer" && navigate("/customer-dashboard");
+        finalUser.userType === "rider" && navigate("/rider-dashboard");
+      } else {
+        navigate('/');
+      }
+    }
+
+    catch (error) {
       toast.error(error?.response?.data?.message || "Login failed");
     }
     finally {
@@ -90,7 +110,7 @@ const Login = () => {
                 id="Email"
                 onChange={handleChange}
                 placeholder="Enter your Email"
-                className="border p-2  "
+                className="border p-2"
               />
 
               <label htmlFor="password">Enter your password</label>
@@ -127,7 +147,7 @@ const Login = () => {
                 <h1 className="text-center mt-1">
                   Do you have account?
                   <Link
-                    to="/Register"
+                    to="/register"
                     className="text-[var(--color-primary)] hover:underline"
                   >
                     Create an account

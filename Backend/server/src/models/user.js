@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema(
         type: String,
       },
     },
-      dob: {
+    dob: {
       type: Date,
       required: true,
     },
@@ -30,12 +30,17 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userType: {
+      type: String,
+      enum: ["customer", "restaurant", "rider"],
+      default: "customer",
+    }
   },
   {
     timestamps: true,
   },
-);   
+);
 
 
-const user = mongoose.model("user",UserSchema);
+const user = mongoose.model("user", UserSchema);
 export default user;

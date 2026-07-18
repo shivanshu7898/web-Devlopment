@@ -48,7 +48,13 @@ function Navbar() {
         
         <div className="flex items-center">
           <Link
-            to="/Customer-Dashboard"
+            to={
+              user?.userType === "restaurant"
+                ? "/restaurant-dashboard"
+                : user?.userType === "rider"
+                ? "/rider-dashboard"
+                : "/customer-dashboard"
+            }
             className="px-2.5 py-1 rounded text-amber-50 hover:border"
           >
             <img
@@ -70,15 +76,12 @@ function Navbar() {
         </div>
       ) : (
         <div className="flex gap-1.5 items-center py-3 text-lg text-amber-50">
-          <Link
-            to="/Login"
-            className="px-2.5 py-1 rounded hover:border"
-          >
+          <Link to="/login" className="px-2.5 py-1 rounded hover:border">
             Login
           </Link>
 
           <Link
-            to="/Register"
+            to="/register"
             className="border px-2.5 py-1 rounded  hover:bg-var(--color-primary) text-amber-50"
           >
             Register

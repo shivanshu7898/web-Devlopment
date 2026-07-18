@@ -4,7 +4,7 @@ import api from "../../config/connect.js";
 import { MdPhotoCamera, MdEdit } from "react-icons/md";
 import { toast } from "react-hot-toast";
 
-const CustomerSetting = () => {
+const restaurantSetting = () => {
   const [user, setUser] = useState(null);
   const [editingProfile, setEditingProfile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -234,4 +234,4 @@ const CustomerSetting = () => {
     
   );
 };
-export default CustomerSetting
+export default restaurantSetting

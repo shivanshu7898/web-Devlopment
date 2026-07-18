@@ -4,13 +4,19 @@ import genToken from "../utils/auth.service.js";
 
 export const RegisterUser = async (req, res, next) => {
   try {
-    const { fullName, Email,number, dob ,password  } = req.body;
+    const { fullName, Email, number, dob, password, userType } = req.body;
 
-    if (!fullName || !Email || !password || !number ||!dob) {
+    if (!fullName || !Email || !password || !number || !dob || !userType) {
       const error = new Error("All fields required");
       error.statusCode = 400;
       return next(error);
     }
+    if (!["customer", "restaurant", "rider"].includes(userType)) {
+      const error = new Error("Invalid user type");
+      error.statusCode = 404;
+      return next(error);
+    }
+    
     const existingUser = await User.findOne({ Email });
     if (existingUser) {
       const error = new Error("Email Already Registered");
@@ -34,9 +40,10 @@ export const RegisterUser = async (req, res, next) => {
       password: hashedPassword,
       dob,
       photo,
+      userType: userType || undefined,
     });
 
-    res.status(201).json({ message: "user register successfully" });
+    res.status(201).json({ message: "user register successfully", data: NewUser });
   } catch (error) {
     console.log(error.message);
   }
@@ -44,7 +51,7 @@ export const RegisterUser = async (req, res, next) => {
 
 export const Login = async (req, res, next) => {
   try {
-    const { Email, password } = req.body;
+    const { Email, password, userType } = req.body;
 
     if (!Email || !password) {
       const error = new Error("All fields required");
@@ -60,6 +67,8 @@ export const Login = async (req, res, next) => {
       return next(error);
     }
 
+
+
     const isVerified = await bcrypt.compare(password, existingUser.password);
     if (!isVerified) {
       const error = new Error("Invalid Password");
@@ -72,10 +81,12 @@ export const Login = async (req, res, next) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
+    const userObj = existingUser.toObject();
+    delete userObj.password;
 
     return res.status(200).json({
       message: "Login Successful",
-      
+      data: userObj,
     });
   } catch (error) {
     next(error);
@@ -83,12 +94,12 @@ export const Login = async (req, res, next) => {
 };
 
 
-export const Logout = (req, res, next)=>{
+export const Logout = (req, res, next) => {
 
- try {
+  try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false, 
+      secure: false,
       sameSite: "lax",
     });
 

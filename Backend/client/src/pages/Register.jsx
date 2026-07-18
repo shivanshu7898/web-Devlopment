@@ -1,19 +1,21 @@
 import React from "react";
 import foodTable from "../assets/foodTable.png";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../config/connect.js"
+import toast from "react-hot-toast";
 
 const Register = () => {
-
+  const userType = useParams().userType;
   const [formData, setFormData] = useState({
     fullName: "",
     Email: "",
     number: "",
     dob: "",
-
     password: "",
     confirmPassword: "",
+    agreeTerms: false,
+    userType: "customer",
   });
 
 
@@ -40,16 +42,26 @@ const Register = () => {
     if (!formData.password.trim()) {
       newErrors.password = "Password Required;"
     }
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+    }
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "password do not match"
     }
-    if (!formData.confirmPassword)
-      newErrors.confirmPassword = "Please confirm your password";
+    if (!formData.agreeTerms) {
+      newErrors.agreeTerms = "You must agree to terms and conditions";
+    }
 
     return newErrors;
   }
 
-
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
   const handleChange = (e) => {
     setFormData({
       ...formData, [e.target.name]: e.target.value,
@@ -67,9 +79,9 @@ const Register = () => {
     }
     try {
       const res = await api.post("/auth/register", formData);
-      alert(res.data.message);
+      toast.success(res.data.message);
     } catch (error) {
-      alert(error.response.data.message);
+    toast.error(error.response.data.message);
     }
   };
   return (
@@ -80,6 +92,35 @@ const Register = () => {
             <div className="text-center">
               <h1 className="text-3xl font-semibold text-(--color-primary)">Create Account</h1>
               <p className="opacity-60">Join us as a Customer, Restaurant, or Rider</p>
+            </div>
+            <div>
+              {/* User Type Selection */}
+              <div className="mb-6">
+                <label className="block text-(--color-neutral) font-semibold mb-3">
+                  Register as:
+                </label>
+                <div className="flex gap-5">
+                  {["customer", "restaurant", "rider"].map((type) => (
+                    <label
+                      key={type}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name="userType"
+                        value={type}
+                        checked={formData.userType === type}
+                        onChange={handleInputChange}
+                        className="cursor-pointer"
+                       
+                      />
+                      <span className="text-(--color-neutral) capitalize">
+                        {type}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col  gap-3">
               <input
@@ -162,10 +203,14 @@ const Register = () => {
               <div className="flex">
                 <input
                   type="checkbox"
-                  name="conditionCheckBox"
-                  id="conditionCheckBox"
+                  name="agreeTerms"
+                  checked={formData.agreeTerms}
+                  onChange={handleInputChange}
                 />
                 <p>I agree to the term and conditions.</p>
+                {
+                  errors.conditionCheckBox && <span className="text-sm pb-3 text-red-500">{errors.conditionCheckBox}</span>
+                }
               </div>
               <div>
                 <button
@@ -176,10 +221,7 @@ const Register = () => {
                 </button>
                 <h1 className="text-center mt-1">
                   Already Registered?
-                  <Link
-                    to="/Login"
-                    className="text-(--color-primary) hover:underline"
-                  >
+                  <Link to="/login" className="text-(--color-primary) hover:underline">
                     Login here
                   </Link>
                 </h1>
