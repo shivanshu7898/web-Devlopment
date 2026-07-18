@@ -1,5 +1,6 @@
 
 import User from "../models/user.js";
+import cloudinary from "../../config/cloudinary.js";
 
 
 export const Profile = async (req, res, next) => {
@@ -41,9 +42,22 @@ export const ProfileUpdate = async (req, res, next) => {
     user.fullName = fullName;
     user.number = number;
 
+    if (req.file && req.file.buffer) {
+      const result = await cloudinary.uploader.upload(
+        `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`,
+        { folder: "profiles" }
+      );
+
+      user.photo = {
+        url: result.secure_url,
+        publicId: result.public_id,
+      };
+    }
+
     await user.save();
 
     res.status(200).json({ message: "User Updated Successfully", data: user });
+
   } catch (error) {
     console.log(error.message);
     next(error);

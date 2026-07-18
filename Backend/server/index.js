@@ -7,6 +7,7 @@ import UserRouter from "./src/routes/user.route.js";
 import connectDB from "./config/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import cloudinary from "./config/cloudinary.js";
 
 const app = express();
 
@@ -24,7 +25,19 @@ app.get("/", (req, res) => {
 });
 app.use(errorhandler);
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+app.listen(port,async () => {
   console.log("server starting now....", port);
   connectDB();
+  try {
+    const result = await cloudinary.api.ping();
+    console.log("cloudinary Connect :");
+    console.log(result);
+    
+    
+  } catch (error) {
+    console.log(error.message);
+    process.exit(1);
+    
+    
+  }
 });

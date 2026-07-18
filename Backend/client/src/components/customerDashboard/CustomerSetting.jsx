@@ -34,18 +34,28 @@ const CustomerSetting = () => {
     try {
       setIsLoading(true);
 
-      const payload = {
-        fullName: formData.fullName,
-        Email: formData.Email.toLowerCase(),
-        number: formData.number,
-      };
+      const payload = new FormData();
+      payload.append("fullName", formData.fullName);
+      payload.append("Email", formData.Email.toLowerCase());
+      payload.append("number", formData.number);
 
-      const response = await api.put(`/user/profile/update`, payload);
+      if (profilePic) {
+        payload.append("image", profilePic);
+      }
+
+      const response = await api.put(`/user/profile/update`, payload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       setUser(response.data.data);
       setEditingProfile(false);
+      setProfilePic(null);
+      setPreview("");
 
       toast.success("Profile updated successfully!");
+      window.location.reload();
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to update profile");
     } finally {
@@ -154,6 +164,7 @@ const CustomerSetting = () => {
           <input
             type="file"
             id="image"
+            name="image"
             className="hidden"
             onChange={handleImage}
           />
