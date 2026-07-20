@@ -4,22 +4,11 @@ import CravingLogo from "../assets/CravingsLogo.png";
 import { MdOutlineLogout } from "react-icons/md";
 import api from "../config/connect.js";
 import toast from 'react-hot-toast';
+import { useAuth } from "../context/AuthContext.jsx";
 
 function Navbar() {
-  const [user, setUser] = useState(null);
+  const{user , setUser}  = useAuth();
   const navigate = useNavigate();
-
-
-  const getProfile = async () => {
-    try {
-      const res = await api.get("/user/profile");
-      setUser(res.data.data);
-      console.log(res);
-    } catch (error) {
-      setUser(null);
-    }
-     
-  };
 
   const handleLogout = async () => {
   try {
@@ -31,13 +20,6 @@ function Navbar() {
     console.log(error);
   }
 };
-
-  useEffect(() => {
-    getProfile();
-  }, []);
-  
-  
-  
   return (
     <div className="flex justify-between px-1 bg-(--color-primary)">
       <Link to="/">
@@ -63,6 +45,10 @@ function Navbar() {
               className="object-cover rounded-full w-12 h-12"
             />
           </Link>
+          <div>
+            <h1 className="text-bold text-white">{user.fullName}</h1>
+            <h4 className="text-white text-sm" >{user.userType}</h4>
+          </div>
 
           <button
             className="px-2.5 rounded hover:bg-(--color-primary)] text-amber-50"

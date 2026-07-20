@@ -1,11 +1,11 @@
 import React from 'react'
-import restaurantSetting from '../../components/restaurantDashboard/restaurantSetting'
-import restaurantOverview from '../../components/restaurantDashboard/restaurantOverview'
-import restaurantOrder from '../../components/restaurantDashboard/restaurantOrder'
+import RestaurantSetting from "../../components/restaurantDashboard/RestaurantSetting";
+import RestaurantOverview from "../../components/restaurantDashboard/RestaurantOverview";
+import RestaurantOrder from "../../components/restaurantDashboard/RestaurantOrder";
 import Sidebar from '../../components/restaurantDashboard/Sidebar'
 import { useLocation, useNavigate } from "react-router-dom";
 
-const restaurantDashboard = () => {
+const RestaurantDashboard = () => {
   const navigate = useNavigate();
   const active = useLocation().state?.activeTab;
   const [activeTab, setActiveTab] = React.useState(active || "overview");
@@ -17,13 +17,13 @@ const restaurantDashboard = () => {
 
         </div>
         <div className="w-14/17 bg-(--color-base-100) p-4 rounded-lg shadow-md h-full">
-          {activeTab === "overview" && <restaurantOverview />}
-          {activeTab === "settings" && <restaurantSetting />}
-          {activeTab === "orders" && <restaurantOrder />}
+          {activeTab === "overview" && <RestaurantOverview />}
+          {activeTab === "settings" && <RestaurantSetting />}
+          {activeTab === "orders" && <RestaurantOrder />}
         </div>
       </div>
     </>
   );
 };
 
-export default restaurantDashboard
+export default RestaurantDashboard

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const restaurantOrder = () => {
+const RestaurantOrder = () => {
   return (
-    <div>restaurantOrder</div>
+    <div>RestaurantOrder</div>
   )
 }
 
-export default restaurantOrder
+export default RestaurantOrder

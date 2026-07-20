@@ -1,11 +1,11 @@
 import React from 'react'
-import riderSetting from '../../components/riderDashboard/riderSetting'
-import RiderOverview from '../../components/riderDashboard/RiderOverview'
-import riderOrder from '../../components/riderDashboard/riderOrder'
+import RiderSetting from '../../components/riderDashboard/riderSetting'
+import RiderOverview from '../../components/riderDashboard/riderOverview'
+import RiderOrder from '../../components/riderDashboard/riderOrder'
 import Sidebar from '../../components/riderDashboard/Sidebar'
 import { useLocation, useNavigate } from "react-router-dom";
 
-const riderDashboard = () => {
+const RiderDashboard = () => {
   const navigate = useNavigate();
   const active = useLocation().state?.activeTab;
   const [activeTab, setActiveTab] = React.useState(active || "overview");
@@ -18,12 +18,12 @@ const riderDashboard = () => {
         </div>
         <div className="w-14/17 bg-(--color-base-100) p-4 rounded-lg shadow-md h-full">
           {activeTab === "overview" && <RiderOverview />}
-          {activeTab === "settings" && <riderSetting />}
-          {activeTab === "orders" && <riderOrder />}
+          {activeTab === "settings" && <RiderSetting />}
+          {activeTab === "orders" && <RiderOrder />}
         </div>
       </div>
     </>
   );
 };
 
-export default riderDashboard
+export default RiderDashboard

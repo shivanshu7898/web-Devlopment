@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import api from "../../config/connect.js";
 import { MdPhotoCamera, MdEdit } from "react-icons/md";
 import { toast } from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const CustomerSetting = () => {
-  const [user, setUser] = useState(null);
+const {user, setUser}  = useAuth();
   const [editingProfile, setEditingProfile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState("");
@@ -98,6 +99,9 @@ const CustomerSetting = () => {
   return (
 
     <div className="bg-white shadow-lg rounded-xl p-6 w-full">
+      <div>
+        <h1 className="text-center text-2xl">{user.userType} Dashboard</h1>
+      </div>
       <div className="flex justify-end items-center">
 
         {!editingProfile ? (
@@ -107,6 +111,12 @@ const CustomerSetting = () => {
               className="flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm"
             >
               <MdEdit /> Edit
+            </button>
+            <button
+              onClick={() => setEditingProfile(true)}
+              className="flex items-center gap-2 bg-grey- text-(--color-primary-content) px-3 py-1 rounded text-sm"
+            >
+              <MdEdit /> Update Password
             </button>
 
           </div>

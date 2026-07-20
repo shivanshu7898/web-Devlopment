@@ -6,6 +6,7 @@ import api from "../config/connect.js"
 import toast from "react-hot-toast";
 
 const Register = () => {
+  const navigate = useNavigate();
   const userType = useParams().userType;
   const [formData, setFormData] = useState({
     fullName: "",
@@ -80,6 +81,7 @@ const Register = () => {
     try {
       const res = await api.post("/auth/register", formData);
       toast.success(res.data.message);
+      navigate("/login")
     } catch (error) {
     toast.error(error.response.data.message);
     }

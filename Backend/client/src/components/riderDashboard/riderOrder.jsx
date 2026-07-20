@@ -1,9 +1,9 @@
 import React from 'react'
 
-const riderOrder = () => {
+const RiderOrder = () => {
   return (
-    <div>riderOrder</div>
+    <div>RiderOrder</div>
   )
 }
 
-export default riderOrder
+export default RiderOrder

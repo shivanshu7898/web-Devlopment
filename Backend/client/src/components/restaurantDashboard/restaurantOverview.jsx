@@ -1,9 +1,9 @@
 import React from 'react'
 
-const restaurantOverview = () => {
+const RestaurantOverview = () => {
   return (
-    <div>restaurantOverview</div>
+    <div>RestaurantOverview</div>
   )
 }
 
-export default restaurantOverview
+export default RestaurantOverview

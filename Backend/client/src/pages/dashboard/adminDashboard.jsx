@@ -1,11 +1,11 @@
 import React from 'react'
-import adminSetting from '../../components/adminDashboard/adminSetting'
-import adminOverview from '../../components/adminDashboard/adminOverview'
-import adminOrder from '../../components/adminDashboard/adminOrder'
+import AdminSetting from '../../components/adminDashboard/adminSetting'
+import AdminOverview from '../../components/adminDashboard/adminOverview'
+import AdminOrder from '../../components/adminDashboard/adminOrder'
 import Sidebar from '../../components/adminDashboard/Sidebar'
 import { useLocation, useNavigate } from "react-router-dom";
 
-const adminDashboard = () => {
+const AdminDashboard = () => {
     const navigate = useNavigate();
     const active = useLocation().state?.activeTab;
     const [activeTab, setActiveTab] = React.useState(active || "overview");
@@ -17,13 +17,13 @@ const adminDashboard = () => {
 
                 </div>
                 <div className="w-14/17 bg-(--color-base-100) p-4 rounded-lg shadow-md h-full">
-                    {activeTab === "overview" && <adminOverview />}
-                    {activeTab === "settings" && <adminSetting />}
-                    {activeTab === "orders" && <adminOrder />}
+                    {activeTab === "overview" && <AdminOverview />}
+                    {activeTab === "settings" && <AdminSetting />}
+                    {activeTab === "orders" && <AdminOrder />}
                 </div>
             </div>
         </>
     );
 };
 
-export default adminDashboard
+export default AdminDashboard
