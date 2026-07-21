@@ -16,7 +16,7 @@ export const RegisterUser = async (req, res, next) => {
       error.statusCode = 404;
       return next(error);
     }
-    
+
     const existingUser = await User.findOne({ Email });
     if (existingUser) {
       const error = new Error("Email Already Registered");
@@ -43,7 +43,9 @@ export const RegisterUser = async (req, res, next) => {
       userType: userType || undefined,
     });
 
-    res.status(201).json({ message: "user register successfully", data: NewUser });
+    res
+      .status(201)
+      .json({ message: "user register successfully", data: NewUser });
   } catch (error) {
     console.log(error.message);
   }
@@ -66,8 +68,6 @@ export const Login = async (req, res, next) => {
       error.statusCode = 404;
       return next(error);
     }
-
-
 
     const isVerified = await bcrypt.compare(password, existingUser.password);
     if (!isVerified) {
@@ -93,9 +93,7 @@ export const Login = async (req, res, next) => {
   }
 };
 
-
 export const Logout = (req, res, next) => {
-
   try {
     res.clearCookie("token", {
       httpOnly: true,
@@ -108,6 +106,44 @@ export const Logout = (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  };
+  }
 };
 
+export const UpdatePassword = async (req, res, next) => {
+  try {
+    const {Email, oldPassword, newPassword } = req.body;
+
+ 
+  const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "Old Password Incorrect",
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    user.password = hash;
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Password Updated Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};

@@ -4,13 +4,17 @@ import api from "../../config/connect.js";
 import { MdPhotoCamera, MdEdit } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { MdOutlineAddAPhoto, MdOutlineLockReset } from "react-icons/md";
+import PasswordChangeModal from "../PasswordChangeModal/PasswordChangeModal.jsx";
 
 const CustomerSetting = () => {
-const {user, setUser}  = useAuth();
+  const { user, setUser } = useAuth();
   const [editingProfile, setEditingProfile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState("");
   const [profilePic, setProfilePic] = useState(null);
+  const [isPasswordChangeModalOpen, setIsPasswordChangeModalOpen] =
+    useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     Email: "",
@@ -97,7 +101,7 @@ const {user, setUser}  = useAuth();
     getProfile();
   }, []);
   return (
-
+    <>
     <div className="bg-white shadow-lg rounded-xl p-6 w-full">
       <div>
         <h1 className="text-center text-2xl">{user.userType} Dashboard</h1>
@@ -113,8 +117,8 @@ const {user, setUser}  = useAuth();
               <MdEdit /> Edit
             </button>
             <button
-              onClick={() => setEditingProfile(true)}
-              className="flex items-center gap-2 bg-grey- text-(--color-primary-content) px-3 py-1 rounded text-sm"
+               onClick={() => setIsPasswordChangeModalOpen(true)}
+              className="flex items-center gap-2  bg-(--color-primary) text-white px-3 py-1 rounded text-sm"
             >
               <MdEdit /> Update Password
             </button>
@@ -210,7 +214,6 @@ const {user, setUser}  = useAuth();
               value={formData.Email}
               onChange={handleProfileChange}
               disabled={!editingProfile}
-              disabled
               className={`w-full px-4 py-3
              ${editingProfile
                   ? ""
@@ -244,7 +247,13 @@ const {user, setUser}  = useAuth();
       </div>
 
     </div>
-
+    {isPasswordChangeModalOpen && (
+      <PasswordChangeModal
+        open={isPasswordChangeModalOpen}
+        onClose={() => setIsPasswordChangeModalOpen(false)}
+      />
+    )}
+    </>
   );
 };
 export default CustomerSetting
