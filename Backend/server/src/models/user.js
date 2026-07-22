@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: ["customer", "restaurant", "rider"],
       default: "customer",
-    }
+    },
   },
   {
     timestamps: true,
