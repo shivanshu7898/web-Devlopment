@@ -6,9 +6,9 @@ const sendEmail = async (to, subject, message) => {
   try {
       console.log("Started Sending Email");
 
-       console.log(process.env.GMAIL_USERNAME);
+      //  console.log(process.env.GMAIL_USERNAME);
 
-       console.log(process.env.GMAIL_PASSCODE);
+      //  console.log(process.env.GMAIL_PASSCODE);
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -18,7 +18,7 @@ const sendEmail = async (to, subject, message) => {
       },
     });
 
-      console.log("3....2....1....");
+      // console.log("3....2....1....");
 
     const mailOption = {
       from: process.env.GMAIL_NAME,
@@ -27,7 +27,7 @@ const sendEmail = async (to, subject, message) => {
       html: message,
     };
 
-      console.log("Sending Email");
+      console.log("Send Email");
 
     const res = await transporter.sendMail(mailOption);
     console.log(res);

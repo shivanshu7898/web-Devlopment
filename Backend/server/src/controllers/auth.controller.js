@@ -1,8 +1,13 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
-import genToken from "../utils/auth.service.js";
+import { genToken } from "../utils/auth.service.js";
 import OTP from "../models/otp.js";
 import { sendMail } from "../utils/sendMail.service.js";
+import { genOTPToken } from "../utils/auth.service.js";
+import { OTPAuthProtect } from "../middlewares/auth.middleware.js"
+import { OAuth2Client } from "google-auth-library";
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 export const RegisterUser = async (req, res, next) => {
   try {
     const { fullName, Email, number, dob, password, userType } = req.body;
@@ -159,7 +164,7 @@ export const SendOtp = async (req, res, next) => {
 
     const existingUser = await User.findOne({ Email });
     console.log(existingUser);
-    
+
     if (!existingUser) {
       const error = new Error("Email not registered");
       error.statusCode = 404;
@@ -238,6 +243,7 @@ export const ResetPassword = async (req, res, next) => {
     const { newPassword } = req.body;
 
     const currentUser = req.user;
+    console.log(currentUser);
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
@@ -247,7 +253,88 @@ export const ResetPassword = async (req, res, next) => {
 
     res.status(200).json({ message: "Password Changed" });
   } catch (error) {
-    console.log(error.message);
-    next();
+    console.error(error.message);
+    next(error);
+  }
+};
+export const GoogleLogin = async (req, res, next) => {
+  try {
+    const { credential } = req.body;
+
+    if (!credential) {
+      return res.status(400).json({
+        message: "Credential Required",
+      });
+    }
+
+    // Verify Google Token
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+
+    if (!payload) {
+      return res.status(400).json({
+        message: "Invalid Google Token",
+      });
+    }
+
+    const {
+      email,
+      name,
+      picture,
+      email_verified,
+    } = payload;
+
+    if (!email_verified) {
+      return res.status(400).json({
+        message: "Google Email Not Verified",
+      });
+    }
+
+    // Find User
+    let user = await User.findOne({
+      Email: email,
+    });
+
+    // Create User if not exists
+    if (!user) {
+      user = await User.create({
+        fullName: name,
+        Email: email,
+        password: "", // Better: make password optional in schema
+        number: "",
+        dob: null,
+        photo: {
+          url: picture,
+          publicId: null,
+        },
+        userType: "customer",
+      });
+    }
+
+    // Generate JWT
+    const token = genToken(user._id);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      secure: false,
+      sameSite: "lax",
+    });
+
+    const userObj = user.toObject();
+    delete userObj.password;
+
+    return res.status(200).json({
+      success: true,
+      message: "Google Login Successful",
+      data: userObj,
+    });
+
+  } catch (error) {
+    next(error);
   }
 };

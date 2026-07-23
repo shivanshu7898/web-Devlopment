@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../config/connect";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import foodTable from "../assets/foodTable.png";
 import pizza from "../assets/image.png"
+import ForgotPasswordModal from "../components/PasswordChangeModal/forgotPassword";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const { isLogin, user, getProfile } = useAuth();
+  const handleGoogleLogin = async (credentialResponse) => {
+  try {
+    const res = await api.post("/auth/google-login", {
+      credential: credentialResponse.credential,
+    });
+
+    console.log(res.data);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 
@@ -19,6 +33,9 @@ const Login = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
+    useState(false);
 
   useEffect(() => {
     if (!isLogin || !user) return;
@@ -63,8 +80,11 @@ const Login = () => {
       return;
     }
 
+
+    setLoading(true);
+    console.log("Login submitted:", formData);
     try {
-    
+
 
       const res = await api.post("/auth/login", formData);
 
@@ -72,10 +92,12 @@ const Login = () => {
       await getProfile();
     } catch (error) {
       toast.error(error?.response?.data?.message || "Login Failed");
-    } 
+    } finally {
+      setLoading(false)
+    }
   };
 
-   return (
+  return (
     <>
       <div id="foodTable">
         <div className="flex  p-10 py-20">
@@ -114,18 +136,20 @@ const Login = () => {
                   id="remember"
                 />
                   <p className='px-1'>Remember me</p></div>
-                <div>
-                  <h1>
-                    forgot Password?
-                  </h1>
+                <div
+                  onClick={() => setIsForgotPasswordModalOpen(true)}
+                  className="text-sm text-(--color-primary) hover:underline transition-colors"
+                >
+                  Forgot Password?
                 </div>
               </div>
               <div>
                 <button
                   type="submit"
-                  className=" w-full p-2.5 rounded bg-(--color-primary) text-white hover:opacity-90"
+                  disabled={loading}
+                  className="w-full py-3 bg-(--color-primary) text-white font-semibold rounded-md hover:bg-orange-700 transition-colors duration-300 mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                login
+                  {loading ? "Logging in..." : "Login"}
                 </button>
                 <h1 className="text-center mt-1">
                   Do you have account?
@@ -141,6 +165,21 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {isForgotPasswordModalOpen && (
+        <ForgotPasswordModal
+          open={isForgotPasswordModalOpen}
+          onClose={() => setIsForgotPasswordModalOpen(false)}
+        />
+      )}
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log("Login Success");
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
     </>
   )
 };

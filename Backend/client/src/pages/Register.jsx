@@ -21,6 +21,18 @@ const Register = () => {
 
 
   const [errors, setErrors] = useState({});
+ const handleGoogleLogin = async (credentialResponse) => {
+  try {
+    const res = await api.post("/auth/google-login", {
+      credential: credentialResponse.credential,
+    });
+
+    console.log(res.data);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
   const validation = (formData) => {
@@ -83,7 +95,7 @@ const Register = () => {
       toast.success(res.data.message);
       navigate("/login")
     } catch (error) {
-    toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
   return (
@@ -114,7 +126,7 @@ const Register = () => {
                         checked={formData.userType === type}
                         onChange={handleInputChange}
                         className="cursor-pointer"
-                       
+
                       />
                       <span className="text-(--color-neutral) capitalize">
                         {type}
@@ -232,6 +244,10 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <GoogleLogin
+        onSuccess={handleGoogleLogin}
+        onError={() => console.log("Login Failed")}
+      />
     </>
   );
 };
