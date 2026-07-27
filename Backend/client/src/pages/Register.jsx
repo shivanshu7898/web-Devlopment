@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../config/connect.js"
 import toast from "react-hot-toast";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -21,18 +22,18 @@ const Register = () => {
 
 
   const [errors, setErrors] = useState({});
- const handleGoogleLogin = async (credentialResponse) => {
-  try {
-    const res = await api.post("/auth/google-login", {
-      credential: credentialResponse.credential,
-    });
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      const res = await api.post("/auth/google-login", {
+        credential: credentialResponse.credential,
+      });
 
-    console.log(res.data);
+      console.log(res.data);
 
-  } catch (error) {
-    console.log(error);
-  }
-};
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   const validation = (formData) => {
@@ -233,6 +234,15 @@ const Register = () => {
                 >
                   Register
                 </button>
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    console.log("Login Success");
+                    console.log(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
                 <h1 className="text-center mt-1">
                   Already Registered?
                   <Link to="/login" className="text-(--color-primary) hover:underline">
@@ -244,10 +254,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <GoogleLogin
-        onSuccess={handleGoogleLogin}
-        onError={() => console.log("Login Failed")}
-      />
     </>
   );
 };

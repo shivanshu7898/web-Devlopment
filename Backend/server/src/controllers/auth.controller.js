@@ -43,6 +43,7 @@ export const RegisterUser = async (req, res, next) => {
       fullName,
       Email,
       number,
+      provider:"local",
       password: hashedPassword,
       dob,
       photo,
@@ -56,49 +57,67 @@ export const RegisterUser = async (req, res, next) => {
     console.log(error.message);
   }
 };
-
 export const Login = async (req, res, next) => {
   try {
     const { Email, password } = req.body;
 
     if (!Email || !password) {
-      const error = new Error("All fields required");
-      error.statusCode = 400;
-      return next(error);
+      return res.status(400).json({
+        message: "All fields are required",
+      });
     }
 
+    // Check user
     const existingUser = await User.findOne({ Email });
 
     if (!existingUser) {
-      const error = new Error("Invalid Email");
-      error.statusCode = 404;
-      return next(error);
+      return res.status(404).json({
+        message: "Invalid Email",
+      });
     }
 
-    const isVerified = await bcrypt.compare(password, existingUser.password);
-    if (!isVerified) {
-      const error = new Error("Invalid Password");
-      error.statusCode = 401;
-      return next(error);
+    // If account created with Google
+    if (existingUser.provider === "google") {
+      return res.status(400).json({
+        message: "This account uses Google Sign-In. Please continue with Google.",
+      });
     }
+
+    // Check password
+    const isVerified = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+
+    if (!isVerified) {
+      return res.status(401).json({
+        message: "Invalid Password",
+      });
+    }
+
+    // Generate JWT
     const token = genToken(existingUser._id);
 
     res.cookie("token", token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
+      secure: false, // true in production with HTTPS
+      sameSite: "lax",
     });
+
     const userObj = existingUser.toObject();
     delete userObj.password;
 
     return res.status(200).json({
+      success: true,
       message: "Login Successful",
       data: userObj,
     });
+
   } catch (error) {
     next(error);
   }
 };
-
 export const Logout = (req, res, next) => {
   try {
     res.clearCookie("token", {

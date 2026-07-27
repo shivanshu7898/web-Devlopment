@@ -13,17 +13,18 @@ const Login = () => {
 
   const { isLogin, user, getProfile } = useAuth();
   const handleGoogleLogin = async (credentialResponse) => {
-  try {
-    const res = await api.post("/auth/google-login", {
-      credential: credentialResponse.credential,
-    });
+    try {
+      const res = await api.post("/auth/google-login", {
+         credential: credentialResponse.credential,
+      });
 
-    console.log(res.data);
+      console.log(res.data);
+      window.location.reload();
 
-  } catch (error) {
-    console.log(error);
-  }
-};
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -151,6 +152,14 @@ const Login = () => {
                 >
                   {loading ? "Logging in..." : "Login"}
                 </button>
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    handleGoogleLogin(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
                 <h1 className="text-center mt-1">
                   Do you have account?
                   <Link
@@ -171,15 +180,7 @@ const Login = () => {
           onClose={() => setIsForgotPasswordModalOpen(false)}
         />
       )}
-      <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          console.log("Login Success");
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
+
     </>
   )
 };
