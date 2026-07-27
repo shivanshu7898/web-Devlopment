@@ -2,7 +2,7 @@ import React from 'react'
 
 const CustomerOverview = () => {
   return (
-    <div>CustomerOverview</div>
+    <div>CustomerOverview ka overview dikh </div>
   )
 }
 
