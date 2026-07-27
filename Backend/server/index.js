@@ -8,10 +8,12 @@ import connectDB from "./config/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import cloudinary from "./config/cloudinary.js";
+import morgan from "morgan";
 
 const app = express();
 
 app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"], credentials: true }));
+app.use(morgan("dev"));
 
 app.use(express.json());
 app.use(cookieParser())

@@ -1,11 +1,11 @@
-
 import React, { useEffect, useState } from "react";
 import api from "../../config/connect.js";
 import { MdPhotoCamera, MdEdit } from "react-icons/md";
 import { toast } from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext.jsx";
 
-const CustomerSetting = () => {
-  const [user, setUser] = useState(null);
+const RestaurantSetting = () => {
+  const {user, setUser} = useAuth();
   const [editingProfile, setEditingProfile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState("");
@@ -234,4 +234,4 @@ const CustomerSetting = () => {
     
   );
 };
-export default CustomerSetting
+export default RestaurantSetting

@@ -5,28 +5,41 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import CustomerDashboard from "./pages/dashboard/customerDashboard";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {Toaster} from "react-hot-toast"
+import RiderDashboard from "./pages/dashboard/riderDashboard";
+import RestaurantDashboard from "./pages/dashboard/restaurantDashboard";
+import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast"
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+
       <Toaster />
       <Navbar />
-     
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Customer-Dashboard" element={<CustomerDashboard />} />
-          <Route path="/Register" element={<Register />} />
-          
-        </Routes>
-       
-      </BrowserRouter>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/customer-dashboard" element={
+          <ProtectedRoute allowedRole="customer" >
+            <CustomerDashboard />
+            </ProtectedRoute>} />
+        <Route path="/rider-dashboard" element={
+          <ProtectedRoute allowedRole="rider">
+          <RiderDashboard />
+        </ProtectedRoute>} />
+        <Route path="/restaurant-dashboard" element={
+          <ProtectedRoute allowedRole="restaurant">
+          <RestaurantDashboard />
+        </ProtectedRoute>} />
+        <Route path="/register" element={<Register />} />
+
+      </Routes>
+
+
     </>
   );
 }

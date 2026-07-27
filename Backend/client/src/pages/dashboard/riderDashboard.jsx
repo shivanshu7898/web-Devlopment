@@ -1,11 +1,11 @@
 import React from 'react'
-import CustomerSetting from '../../components/customerDashboard copy 3/CustomerSetting'
-import CustomerOverview from '../../components/customerDashboard copy 3/CustomerOverview'
-import CustomerOrder from '../../components/customerDashboard copy 3/CustomerOrder'
-import Sidebar from '../../components/customerDashboard copy 3/Sidebar'
+import RiderSetting from '../../components/riderDashboard/riderSetting'
+import RiderOverview from '../../components/riderDashboard/riderOverview'
+import RiderOrder from '../../components/riderDashboard/riderOrder'
+import Sidebar from '../../components/riderDashboard/Sidebar'
 import { useLocation, useNavigate } from "react-router-dom";
 
-const customerDashboard = () => {
+const RiderDashboard = () => {
   const navigate = useNavigate();
   const active = useLocation().state?.activeTab;
   const [activeTab, setActiveTab] = React.useState(active || "overview");
@@ -17,13 +17,13 @@ const customerDashboard = () => {
 
         </div>
         <div className="w-14/17 bg-(--color-base-100) p-4 rounded-lg shadow-md h-full">
-          {activeTab === "overview" && <CustomerOverview />}
-          {activeTab === "settings" && <CustomerSetting />}
-          {activeTab === "orders" && <CustomerOrder />}
+          {activeTab === "overview" && <RiderOverview />}
+          {activeTab === "settings" && <RiderSetting />}
+          {activeTab === "orders" && <RiderOrder />}
         </div>
       </div>
     </>
   );
 };
 
-export default customerDashboard
+export default RiderDashboard

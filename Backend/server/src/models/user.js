@@ -5,37 +5,63 @@ const UserSchema = new mongoose.Schema(
     fullName: {
       type: String,
       required: true,
+      trim: true,
     },
+
     Email: {
       type: String,
       required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
     },
+
     number: {
       type: String,
-      required: true,
+      default: "",
     },
+
     photo: {
       url: {
         type: String,
+        default: "",
       },
       publicId: {
         type: String,
+        default: null,
       },
     },
-      dob: {
+
+    dob: {
       type: Date,
-      required: true,
+      default: null,
     },
+
     password: {
       type: String,
-      required: true,
+      default: null,
+    },
+
+    userType: {
+      type: String,
+      enum: ["customer", "restaurant", "rider"],
+      default: null,
+    },
+
+    profileCompleted: {
+      type: Boolean,
+      default: false,
+    },
+
+    provider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
     },
   },
   {
     timestamps: true,
-  },
-);   
+  }
+);
 
-
-const user = mongoose.model("user",UserSchema);
-export default user;
+export default mongoose.model("user", UserSchema);

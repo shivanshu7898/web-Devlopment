@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import api from '../config/connect.js'
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../config/connect";
+import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
+import foodTable from "../assets/foodTable.png";
 import pizza from "../assets/image.png"
-import toast from 'react-hot-toast';
-
-
+import ForgotPasswordModal from "../components/PasswordChangeModal/forgotPassword";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const res = await api.get("/user/profile");
 
-        if (res.data.user) {
-          navigate("/");
-        }
-      } catch (error) {
-        // user login nahi hai
-      }
-    };
+  const { isLogin, user, getProfile } = useAuth();
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      const res = await api.post("/auth/google-login", {
+         credential: credentialResponse.credential,
+      });
 
-    checkUser();
-  }, []);
+      console.log(res.data);
+      window.location.reload();
 
-  const [IsLoading, setIsLoading] = useState(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -32,46 +32,72 @@ const Login = () => {
     Email: "",
     password: "",
   });
+
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
+    useState(false);
 
-  const validation = (formData) => {
+  useEffect(() => {
+    if (!isLogin || !user) return;
 
+    if (user.userType === "restaurant") {
+      navigate("/restaurant-dashboard");
+    } else if (user.userType === "rider") {
+      navigate("/rider-dashboard");
+    } else if (user.userType === "customer") {
+      navigate("/customer-dashboard");
+    }
+  }, [isLogin, user, navigate]);
+
+  const validation = () => {
     const newErrors = {};
+
     if (!formData.Email.trim()) {
-      newErrors.Email = "Email Required;"
+      newErrors.Email = "Email Required";
     }
+
     if (!formData.password.trim()) {
-      newErrors.password = "Password Required;"
+      newErrors.password = "Password Required";
     }
+
     return newErrors;
-  }
-  const handleChange = (e) => {
-    setFormData({
-      ...formData, [e.target.name]: e.target.value,
-    });
   };
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({});
 
-    const validationErrors = validation(formData);
+    const validationErrors = validation();
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
+
+
+    setLoading(true);
+    console.log("Login submitted:", formData);
     try {
-      setIsLoading(true);
+
+
       const res = await api.post("/auth/login", formData);
+
       toast.success(res.data.message);
-      navigate("/Customer-Dashboard", { replace: true });
+      await getProfile();
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Login failed");
-    }
-    finally {
-      setIsLoading(false);
+      toast.error(error?.response?.data?.message || "Login Failed");
+    } finally {
+      setLoading(false)
     }
   };
+
   return (
     <>
       <div id="foodTable">
@@ -90,7 +116,7 @@ const Login = () => {
                 id="Email"
                 onChange={handleChange}
                 placeholder="Enter your Email"
-                className="border p-2  "
+                className="border p-2"
               />
 
               <label htmlFor="password">Enter your password</label>
@@ -111,24 +137,34 @@ const Login = () => {
                   id="remember"
                 />
                   <p className='px-1'>Remember me</p></div>
-                <div>
-                  <h1>
-                    forgot Password?
-                  </h1>
+                <div
+                  onClick={() => setIsForgotPasswordModalOpen(true)}
+                  className="text-sm text-(--color-primary) hover:underline transition-colors"
+                >
+                  Forgot Password?
                 </div>
               </div>
               <div>
                 <button
                   type="submit"
-                  className=" w-full p-2.5 rounded bg-[var(--color-primary)] text-white hover:opacity-90"
+                  disabled={loading}
+                  className="w-full py-3 bg-(--color-primary) text-white font-semibold rounded-md hover:bg-orange-700 transition-colors duration-300 mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {IsLoading ? "login..." : "login"}
+                  {loading ? "Logging in..." : "Login"}
                 </button>
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    handleGoogleLogin(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
                 <h1 className="text-center mt-1">
                   Do you have account?
                   <Link
-                    to="/Register"
-                    className="text-[var(--color-primary)] hover:underline"
+                    to="/register"
+                    className="text-(--color-primary)hover:underline"
                   >
                     Create an account
                   </Link>
@@ -138,8 +174,15 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {isForgotPasswordModalOpen && (
+        <ForgotPasswordModal
+          open={isForgotPasswordModalOpen}
+          onClose={() => setIsForgotPasswordModalOpen(false)}
+        />
+      )}
+
     </>
   )
 };
 
-export default Login
+export default Login;
