@@ -8,7 +8,7 @@ import { OTPAuthProtect } from "../middlewares/auth.middleware.js"
 import { OAuth2Client } from "google-auth-library";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-export const RegisterUser = async (req, res, next) => {
+export const SendRegisterOTP = async (req, res, next) => {
   try {
     const { fullName, Email, number, dob, password, userType } = req.body;
 
@@ -39,20 +39,37 @@ export const RegisterUser = async (req, res, next) => {
 
     const SALT = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, SALT);
-    const NewUser = await User.create({
-      fullName,
-      Email,
-      number,
-      provider: "local",
-      password: hashedPassword,
-      dob,
-      photo,
-      userType: userType || undefined,
-    });
 
-    res
-      .status(201)
-      .json({ message: "user register successfully", data: NewUser });
+    const newOTP = (Math.floor(Math.random() * 1000000) + 100000)
+      .toString()
+      .slice(0, 6);
+
+    const hashedOTP = await bcrypt.hash(newOTP, 10);
+    await OTP.deleteOne({
+      Email,
+      purpose: "register",
+    });
+    await OTP.create({
+      Email,
+      otp: hashedOTP,
+      purpose: "register",
+      userData: {
+        fullName,
+        Email,
+        number,
+        dob,
+        password: hashedPassword,
+        provider: "local",
+        userType,
+        photo,
+      },
+    });
+    await sendMail(Email, newOTP);
+    return res.status(200).json({
+    success: true,
+    message: "OTP sent successfully",
+    Email,
+});
   } catch (error) {
     console.log(error.message);
   }
@@ -301,7 +318,7 @@ export const GoogleLogin = async (req, res, next) => {
     }
 
     // Find User
-    let user = await User.findOne({Email});
+    let user = await User.findOne({ Email });
     if (!user) {
       return res.status(404).json({
         message: "No account found. Please register first."
