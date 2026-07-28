@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import api from "../../config/connect.js";
 import { MdPhotoCamera, MdEdit } from "react-icons/md";

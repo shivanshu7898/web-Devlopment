@@ -43,7 +43,7 @@ export const RegisterUser = async (req, res, next) => {
       fullName,
       Email,
       number,
-      provider:"local",
+      provider: "local",
       password: hashedPassword,
       dob,
       photo,
@@ -66,8 +66,6 @@ export const Login = async (req, res, next) => {
         message: "All fields are required",
       });
     }
-
-    // Check user
     const existingUser = await User.findOne({ Email });
 
     if (!existingUser) {
@@ -75,29 +73,17 @@ export const Login = async (req, res, next) => {
         message: "Invalid Email",
       });
     }
-
-    // If account created with Google
-    if (existingUser.provider === "google") {
-      return res.status(400).json({
-        message: "This account uses Google Sign-In. Please continue with Google.",
-      });
-    }
-
-    // Check password
     const isVerified = await bcrypt.compare(
       password,
       existingUser.password
     );
-
     if (!isVerified) {
       return res.status(401).json({
         message: "Invalid Password",
       });
     }
-
     // Generate JWT
     const token = genToken(existingUser._id);
-
     res.cookie("token", token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
