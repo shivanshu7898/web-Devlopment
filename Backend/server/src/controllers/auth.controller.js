@@ -6,6 +6,7 @@ import { sendMail } from "../utils/sendMail.service.js";
 import { genOTPToken } from "../utils/auth.service.js";
 import { OTPAuthProtect } from "../middlewares/auth.middleware.js"
 import { OAuth2Client } from "google-auth-library";
+import registerOTPTemplate from "../utils/auth.RegisterOTP.service.js";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const SendRegisterOTP = async (req, res, next) => {
@@ -49,6 +50,10 @@ export const SendRegisterOTP = async (req, res, next) => {
       Email,
       purpose: "register",
     });
+    const otpHTML = registerOTPTemplate(
+      fullName,
+      newOTP
+    );
     await OTP.create({
       Email,
       otp: hashedOTP,
@@ -64,14 +69,81 @@ export const SendRegisterOTP = async (req, res, next) => {
         photo,
       },
     });
-    await sendMail(Email, newOTP);
+    await sendMail(Email, otpHTML);
     return res.status(200).json({
-    success: true,
-    message: "OTP sent successfully",
-    Email,
-});
+      success: true,
+      message: "OTP sent successfully",
+      Email,
+    });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+export const VerifyRegisterOTP = async (req, res, next) => {
+  try {
+    const { Email, otp } = req.body;
+
+    // Validation
+    if (!Email || !otp) {
+      return res.status(400).json({
+        message: "Email and OTP are required",
+      });
+    }
+
+    // Find OTP
+    const existingOTP = await OTP.findOne({
+      Email,
+      purpose: "register",
+    });
+
+    if (!existingOTP) {
+      return res.status(400).json({
+        message: "OTP Expired",
+      });
+    }
+
+    // Verify OTP
+    const isVerified = await bcrypt.compare(
+      otp,
+      existingOTP.otp
+    );
+
+    if (!isVerified) {
+      return res.status(400).json({
+        message: "Invalid OTP",
+      });
+    }
+
+    // Create User
+    const user = await User.create(existingOTP.userData);
+
+    // Delete OTP
+    await existingOTP.deleteOne();
+
+    // Generate JWT
+    const token = genToken(user._id);
+
+    // Set Cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // true in production
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    // Remove Password
+    const userObj = user.toObject();
+    delete userObj.password;
+
+    return res.status(201).json({
+      success: true,
+      message: "Registration Successful",
+      data: userObj,
+    });
+
+  } catch (error) {
+    next(error);
   }
 };
 export const Login = async (req, res, next) => {
