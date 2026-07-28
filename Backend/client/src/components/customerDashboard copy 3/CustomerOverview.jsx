@@ -6,4 +6,3 @@ const CustomerOverview = () => {
   )
 }
 
-export default CustomerOverview
