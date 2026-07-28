@@ -7,19 +7,19 @@ import toast from 'react-hot-toast';
 import { useAuth } from "../context/AuthContext.jsx";
 
 function Navbar() {
-  const{user , setUser}  = useAuth();
+  const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-  try {
-    await api.post("/auth/logout");
-    setUser(null);
-    toast.success("Logout Successfully");
-    navigate("/");
-  } catch (error) {
-    console.log(error);
-  }
-};
+    try {
+      await api.post("/auth/logout");
+      setUser(null);
+      toast.success("Logout Successfully");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex justify-between px-1 bg-(--color-primary)">
       <Link to="/">
@@ -27,15 +27,15 @@ function Navbar() {
       </Link>
 
       {user ? (
-        
+
         <div className="flex items-center">
           <Link
             to={
               user?.userType === "restaurant"
                 ? "/restaurant-dashboard"
                 : user?.userType === "rider"
-                ? "/rider-dashboard"
-                : "/customer-dashboard"
+                  ? "/rider-dashboard"
+                  : "/customer-dashboard"
             }
             className="px-2.5 py-1 rounded text-amber-50 hover:border"
           >
@@ -67,7 +67,7 @@ function Navbar() {
           </Link>
 
           <Link
-            to="/register"
+            to="/send-register-otp"
             className="border px-2.5 py-1 rounded  hover:bg-var(--color-primary) text-amber-50"
           >
             Register
