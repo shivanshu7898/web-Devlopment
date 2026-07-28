@@ -66,6 +66,7 @@ export const Login = async (req, res, next) => {
         message: "All fields are required",
       });
     }
+
     const existingUser = await User.findOne({ Email });
 
     if (!existingUser) {
@@ -300,15 +301,18 @@ export const GoogleLogin = async (req, res, next) => {
     }
 
     // Find User
-    let user = await User.findOne({
-      Email: email,
-    });
+    let user = await User.findOne({Email});
+    if (!user) {
+      return res.status(404).json({
+        message: "No account found. Please register first."
+      });
+    }
 
     // Create User if not exists
     if (!user) {
       user = await User.create({
-        fullName: name,
-        Email: email,
+        fullName: fullName,
+        Email: Email,
         password: "", // Better: make password optional in schema
         number: "",
         dob: null,
