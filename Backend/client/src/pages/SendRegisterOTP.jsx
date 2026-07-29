@@ -111,7 +111,7 @@ const SendRegisterOTP = () => {
   return (
     <div id="foodTable">
       <div className="flex justify-end p-10">
-        <div className="bg-amber-50 w-[420px] p-5 rounded-2xl shadow-2xl">
+        <div className="bg-amber-50 w-[420px] h-[80vh] p-5 rounded-2xl shadow-2xl overflow-auto">
 
           <div className="text-center mb-5">
             <h1 className="text-3xl font-semibold text-(--color-primary)">

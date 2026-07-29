@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../../config/connect";
+import foodTable from "../../assets/foodTable.png";
 
 const VerifyRegisterOtp = () => {
   const navigate = useNavigate();
@@ -9,21 +10,43 @@ const VerifyRegisterOtp = () => {
 
   const formData = location.state;
 
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
 
+  const inputRefs = useRef([]);
+
   useEffect(() => {
     if (!formData) {
-      navigate("/register");
+      navigate("/send-register-otp");
     }
   }, []);
+
+  const handleOtpChange = (value, index) => {
+    if (!/^\d?$/.test(value)) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < 5) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      inputRefs.current[index - 1].focus();
+    }
+  };
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
 
-    if (!otp) {
-      return toast.error("Please enter OTP");
+    const otpValue = otp.join("");
+
+    if (otpValue.length !== 6) {
+      return toast.error("Please enter complete OTP");
     }
 
     try {
@@ -31,7 +54,7 @@ const VerifyRegisterOtp = () => {
 
       const res = await api.post("/auth/verify-register-otp", {
         ...formData,
-        otp,
+        otp: otpValue,
       });
 
       toast.success(res.data.message);
@@ -51,7 +74,7 @@ const VerifyRegisterOtp = () => {
       setResendLoading(true);
 
       const res = await api.post("/auth/send-register-otp", {
-        Email: formData.Email,
+        ...formData,
       });
 
       toast.success(res.data.message);
@@ -63,36 +86,50 @@ const VerifyRegisterOtp = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-xl w-[400px]">
+    <div
+      id="foodTable"
+      className="min-h-screen flex justify-center items-center bg-gray-100"
+    >
+      <div className="bg-amber-50  p-8 rounded-xl shadow-2xl w-[420px]">
 
-        <h1 className="text-3xl font-bold text-center mb-2">
+        <h1 className="text-3xl font-bold text-center mb-2 text-(--color-primary)">
           Verify OTP
         </h1>
 
-        <p className="text-center text-gray-500 mb-5">
+        <p className="text-center text-gray-500">
           OTP sent to
         </p>
 
-        <p className="text-center font-semibold mb-6">
+        <p className="text-center font-semibold mb-8">
           {formData?.Email}
         </p>
 
-        <form onSubmit={handleVerifyOtp} className="space-y-4">
+        <form onSubmit={handleVerifyOtp} className="space-y-6">
 
-          <input
-            type="text"
-            placeholder="Enter 6 Digit OTP"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            maxLength={6}
-            className="border w-full p-3 rounded outline-none"
-          />
+          <div className="flex justify-center gap-3">
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                ref={(el) => (inputRefs.current[index] = el)}
+                type="text"
+                inputMode="numeric"
+                maxLength={1}
+                value={digit}
+                onChange={(e) =>
+                  handleOtpChange(e.target.value, index)
+                }
+                onKeyDown={(e) =>
+                  handleKeyDown(e, index)
+                }
+                className="w-12 h-12 border rounded-lg text-center text-xl font-bold outline-none focus:border-(--color-primary) focus:ring-2 focus:ring-orange-300"
+              />
+            ))}
+          </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-(--color-primary) text-white p-3 rounded"
+            className="w-full bg-(--color-primary) text-white p-3 rounded-lg hover:opacity-90"
           >
             {loading ? "Verifying..." : "Verify OTP"}
           </button>
@@ -102,7 +139,7 @@ const VerifyRegisterOtp = () => {
         <button
           onClick={handleResendOtp}
           disabled={resendLoading}
-          className="mt-4 text-(--color-primary) w-full"
+          className="mt-5 w-full text-(--color-primary) font-medium hover:underline"
         >
           {resendLoading ? "Sending..." : "Resend OTP"}
         </button>
