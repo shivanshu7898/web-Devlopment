@@ -4,6 +4,7 @@ import express from "express";
 import errorhandler from "./src/middlewares/error-handler.js";
 import AuthRouter from "./src/routes/auth.route.js";
 import UserRouter from "./src/routes/user.route.js";
+import restaurantRouter from "./src/routes/restaurant.route.js";
 import connectDB from "./config/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -20,6 +21,7 @@ app.use(cookieParser())
 
 app.use("/auth", AuthRouter);
 app.use("/user", UserRouter);
+app.use("/restaurant", restaurantRouter);
 
 app.get("/", (req, res) => {
   console.log("API hit...");
